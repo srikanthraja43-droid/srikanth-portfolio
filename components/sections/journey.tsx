@@ -74,7 +74,7 @@ export function Journey() {
 
     // Experience items animation
     const items = gsap.utils.toArray(".journey-item")
-    items.forEach((item: any, i) => {
+    items.forEach((item: HTMLElement) => {
       gsap.fromTo(item,
         { opacity: 0, y: 50, filter: "blur(10px)" },
         {

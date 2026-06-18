@@ -30,7 +30,7 @@ export function OrbitingSkills() {
   useGSAP(() => {
     const items = gsap.utils.toArray(".skill-orb")
     
-    items.forEach((item: any) => {
+    items.forEach((item: HTMLElement) => {
       const speed = parseFloat(item.dataset.speed)
       gsap.to(item, {
         y: -600 * speed,
