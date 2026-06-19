@@ -34,7 +34,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-serif text-6xl md:text-9xl text-foreground leading-tight mb-12 tracking-tighter"
+          className="font-serif text-5xl sm:text-7xl md:text-9xl text-foreground leading-tight mb-8 md:mb-12 tracking-tighter"
         >
           Srikanthraja
         </motion.h1>
@@ -48,7 +48,7 @@ export function Hero() {
           <Button 
             variant="outline" 
             size="lg" 
-            className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 px-12 py-8 text-lg uppercase tracking-widest font-bold"
+            className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 px-8 py-6 md:px-12 md:py-8 text-base md:text-lg uppercase tracking-widest font-bold"
             asChild
           >
             <a href="#projects">View Work</a>
@@ -56,7 +56,7 @@ export function Hero() {
           <Button 
             variant="outline" 
             size="lg" 
-            className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-500 px-12 py-8 text-lg uppercase tracking-widest font-bold"
+            className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-500 px-8 py-6 md:px-12 md:py-8 text-base md:text-lg uppercase tracking-widest font-bold"
             asChild
           >
             <a href="#contact">Get In Touch</a>

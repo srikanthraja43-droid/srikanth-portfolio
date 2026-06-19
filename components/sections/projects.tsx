@@ -74,7 +74,7 @@ export function Projects() {
           </motion.h2>
         </div>
 
-        <div className="grid gap-16 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:gap-16 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
@@ -88,22 +88,22 @@ export function Projects() {
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
+                className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-0 md:grayscale md:group-hover:grayscale-0 opacity-80 md:opacity-40 md:group-hover:opacity-100"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 group-hover:opacity-40 transition-all duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 md:group-hover:opacity-40 transition-all duration-700" />
               
-              <div className="absolute bottom-10 left-10 right-10 flex flex-col items-start gap-4">
-                <div className="transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 ease-out">
-                  <span className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold block mb-3">
+              <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex flex-col items-start gap-3">
+                <div className="md:transform md:translate-y-12 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-700 ease-out">
+                  <span className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold block mb-2 md:mb-3">
                     {project.category}
                   </span>
-                  <h3 className="font-serif text-3xl text-foreground mb-4 leading-tight">
+                  <h3 className="font-serif text-xl md:text-3xl text-foreground mb-2 md:mb-4 leading-tight">
                     {project.title}
                   </h3>
-                  <p className="text-xs text-muted-foreground mb-8 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-muted-foreground mb-4 md:mb-8 leading-relaxed line-clamp-2">
                     {project.description}
                   </p>
-                  <Button variant="outline" className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground uppercase tracking-widest text-[10px] font-bold px-8 py-6">
+                  <Button variant="outline" className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground uppercase tracking-widest text-[10px] font-bold px-6 py-4 md:px-8 md:py-6">
                     View Details
                   </Button>
                 </div>

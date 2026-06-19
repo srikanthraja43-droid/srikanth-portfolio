@@ -19,7 +19,7 @@ export function About() {
                 src="/images/profile-photo.jpg"
                 alt="Srikanthraja"
                 fill
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
+                className="object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-1000 ease-in-out"
               />
             </div>
           </motion.div>

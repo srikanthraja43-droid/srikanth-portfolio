@@ -95,9 +95,9 @@ export function Journey() {
   return (
     <section ref={containerRef} id="experience" className="py-32 bg-background relative px-4">
       <div className="container mx-auto max-w-5xl">
-        <div className="flex flex-col items-center gap-6 mb-32 text-center">
+        <div className="flex flex-col items-center gap-6 mb-16 md:mb-32 text-center">
           <span className="text-primary uppercase tracking-[0.4em] text-sm font-bold">Timeline</span>
-          <h2 className="font-serif text-5xl md:text-8xl text-foreground">The Journey</h2>
+          <h2 className="font-serif text-4xl md:text-8xl text-foreground">The Journey</h2>
         </div>
 
         <div className="relative">
@@ -106,7 +106,7 @@ export function Journey() {
             <div ref={lineRef} className="absolute inset-0 bg-primary origin-top" />
           </div>
 
-          <div className="flex flex-col gap-32 relative">
+          <div className="flex flex-col gap-16 md:gap-32 relative">
             {experiences.map((exp, i) => (
               <div 
                 key={i} 
@@ -116,7 +116,7 @@ export function Journey() {
                 <div className="w-full md:w-[45%]">
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-primary/5 blur-xl group-hover:bg-primary/10 transition duration-1000 group-hover:duration-200" />
-                    <div className="relative p-10 bg-secondary/20 border border-primary/5 hover:border-primary/20 transition-all duration-500">
+                    <div className="relative p-6 md:p-10 bg-secondary/20 border border-primary/5 hover:border-primary/20 transition-all duration-500">
                       <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-6 block">
                         {exp.type}
                       </span>
