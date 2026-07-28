@@ -75,6 +75,15 @@ const certificationsData: Certification[] = [
 const learningCerts: LearningCert[] = [
   {
     id: 1,
+    title: "Foundations of Prompt Engineering",
+    issuer: "AWS Training & Certification",
+    date: "Jul 17, 2026",
+    skills: ["Prompt Engineering", "Generative AI", "AWS Bedrock"],
+    issuerColor: "bg-[#FF9900]",
+    issuerLabel: "AWS",
+  },
+  {
+    id: 2,
     title: "What Is Generative AI?",
     issuer: "LinkedIn Learning",
     date: "Jul 17, 2026",
@@ -83,7 +92,7 @@ const learningCerts: LearningCert[] = [
     issuerLabel: "in",
   },
   {
-    id: 2,
+    id: 3,
     title: "Microsoft Certifications: Exams, Paths & Resources",
     issuer: "LinkedIn Learning",
     date: "Jul 18, 2026",
@@ -92,7 +101,7 @@ const learningCerts: LearningCert[] = [
     issuerLabel: "in",
   },
   {
-    id: 3,
+    id: 4,
     title: "Data Analytics Job Simulation",
     issuer: "Deloitte · Forage",
     date: "Jul 20, 2026",
@@ -101,7 +110,7 @@ const learningCerts: LearningCert[] = [
     issuerLabel: "D.",
   },
   {
-    id: 4,
+    id: 5,
     title: "SQL and Relational Databases 101",
     issuer: "CognitiveClass.ai · IBM",
     date: "Jul 20, 2026",
@@ -235,7 +244,7 @@ export function Certifications() {
           </div>
 
           {/* Learning Cards Grid */}
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {learningCerts.map((lc, idx) => (
               <motion.div
                 key={lc.id}
