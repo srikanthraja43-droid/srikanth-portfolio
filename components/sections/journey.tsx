@@ -9,46 +9,32 @@ gsap.registerPlugin(ScrollTrigger)
 
 const experiences = [
   {
-    type: "Award",
-    title: "ARIVOLI 2K26 - 2nd Place",
-    company: "National Level Project Expo",
-    date: "February 2026",
-    desc: "Secured Second Place at Knowledge Institute of Technology, Salem. Recognized for innovative systems design and technical implementation.",
-  },
-  {
-    type: "Production",
+    type: "Work Experience",
     title: "IT Development Intern",
     company: "Infochord Technologies Pvt. Ltd.",
-    date: "December 2025",
-    desc: "Selected for the IT Development Team in Hyderabad. Contributing to scalable web applications and internal tools.",
+    date: "December 2025 - Present",
+    desc: "Selected for the IT Development Team in Hyderabad. Contributing to scalable web applications, modern UI interfaces, and internal software tools.",
   },
   {
-    type: "Academic",
-    title: "National Seminar - AAGTAM 2025",
-    company: "AI & Machine Learning",
-    date: "February 2025",
-    desc: "Participated in the TNSCST supported seminar on 'Advances and Applications of Graph Theory' in AI.",
-  },
-  {
-    type: "Lead Education",
+    type: "Higher Education",
     title: "B.Tech Computer Science & Business Systems",
     company: "Excel Engineering College",
     date: "2023 - 2027",
-    desc: "Currently in 3rd Year. Affiliated with Anna University. CGPA: 7.7/10. Focused on Full Stack Development, Data Structures, and ML.",
+    desc: "Currently in 3rd Year. Affiliated with Anna University. CGPA: 7.7/10. Focused on Full Stack Web Development, Data Structures, Algorithms, and Machine Learning.",
   },
   {
-    type: "Foundation",
-    title: "+1 & +2 (HSC)",
+    type: "Senior Secondary (+1 & +2)",
+    title: "HSC - Mathematics & Biology",
     company: "Pochampalli Boys Higher Secondary School",
     date: "2020 - 2022",
-    desc: "Stream: Mathematics & Biology. Core focus on Physics, Chemistry, and Biological Sciences.",
+    desc: "Stream: Mathematics & Biology. Core focus on Physics, Chemistry, Mathematics, and Biological Sciences.",
   },
   {
-    type: "Debut",
+    type: "Secondary School",
     title: "10th Standard (SSLC)",
     company: "SRV Matric Higher Secondary School",
     date: "Completed March 2020",
-    desc: "Percentage: 80%. School Topper in CS elective. Awarded 'Best Student in Technology' for first website project.",
+    desc: "Percentage: 80%. School Topper in Computer Science elective. Early foundation in software and technology.",
   },
 ]
 
@@ -93,11 +79,11 @@ export function Journey() {
   }, { scope: containerRef })
 
   return (
-    <section ref={containerRef} id="experience" className="py-32 bg-background relative px-4">
+    <section ref={containerRef} id="experience" className="py-28 md:py-36 bg-background relative px-4">
       <div className="container mx-auto max-w-5xl">
-        <div className="flex flex-col items-center gap-6 mb-16 md:mb-32 text-center">
-          <span className="text-primary uppercase tracking-[0.4em] text-sm font-bold">Timeline</span>
-          <h2 className="font-serif text-4xl md:text-8xl text-foreground">The Journey</h2>
+        <div className="flex flex-col items-center gap-4 mb-16 md:mb-24 text-center">
+          <span className="text-primary uppercase tracking-[0.4em] text-xs md:text-sm font-bold">Timeline</span>
+          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl text-foreground">Experience & Education</h2>
         </div>
 
         <div className="relative">
@@ -106,25 +92,25 @@ export function Journey() {
             <div ref={lineRef} className="absolute inset-0 bg-primary origin-top" />
           </div>
 
-          <div className="flex flex-col gap-16 md:gap-32 relative">
+          <div className="flex flex-col gap-12 md:gap-24 relative">
             {experiences.map((exp, i) => (
               <div 
                 key={i} 
-                className={`journey-item flex flex-col md:flex-row items-center justify-between w-full gap-12 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                className={`journey-item flex flex-col md:flex-row items-center justify-between w-full gap-8 md:gap-12 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
               >
                 {/* Content Card */}
                 <div className="w-full md:w-[45%]">
                   <div className="relative group">
                     <div className="absolute -inset-1 bg-primary/5 blur-xl group-hover:bg-primary/10 transition duration-1000 group-hover:duration-200" />
-                    <div className="relative p-6 md:p-10 bg-secondary/20 border border-primary/5 hover:border-primary/20 transition-all duration-500">
-                      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-6 block">
+                    <div className="relative p-6 md:p-8 bg-secondary/20 border border-primary/10 hover:border-primary/30 transition-all duration-500 rounded-2xl">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-4 block font-mono">
                         {exp.type}
                       </span>
-                      <h3 className="font-serif text-3xl text-foreground mb-2">{exp.title}</h3>
-                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">
-                        {exp.company} <span className="mx-2 text-primary/30">•</span> {exp.date}
+                      <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-2 font-semibold">{exp.title}</h3>
+                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">
+                        {exp.company} <span className="mx-2 text-primary/40">•</span> {exp.date}
                       </p>
-                      <p className="text-muted-foreground leading-relaxed text-sm italic">
+                      <p className="text-muted-foreground leading-relaxed text-sm font-light">
                         {exp.desc}
                       </p>
                     </div>
@@ -132,7 +118,7 @@ export function Journey() {
                 </div>
 
                 {/* Dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-background border border-primary z-10 hidden md:block" />
+                <div className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-background border border-primary z-10 hidden md:block rounded-full" />
 
                 {/* Spacer */}
                 <div className="hidden md:block w-[45%]" />

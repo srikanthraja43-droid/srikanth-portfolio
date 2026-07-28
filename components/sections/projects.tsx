@@ -1,124 +1,193 @@
 "use client"
 
-import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowUpRight, Github, ExternalLink, Sparkles, Code2 } from "lucide-react"
 
-const projects = [
+interface Project {
+  number: string
+  title: string
+  subtitle: string
+  description: string
+  tags: string[]
+  href: string
+  githubUrl?: string
+  badgeText: string
+  accentGradient: string
+}
+
+const projects: Project[] = [
   {
-    title: "Next Gen WiFi Technology",
-    category: "IoT System",
-    description: "Advanced WiFi 6E mesh network system with AI-powered optimization and real-time bandwidth management.",
-    image: "/1.png",
-    link: "#",
+    number: "01",
+    title: "Glossary List & Expiry Date Tracker",
+    subtitle: "Smart Inventory & Household Organizer",
+    description: "An intuitive web application built to systematically track food items, household supplies, and expiration dates. Helps users prevent waste with automated visual alerts and categorized inventory management.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js"],
+    href: "https://github.com/srikanthraja43-droid",
+    githubUrl: "https://github.com/srikanthraja43-droid",
+    badgeText: "Inventory & Utility",
+    accentGradient: "from-amber-500/20 via-primary/10 to-transparent",
   },
   {
-    title: "Glossary List Manager",
-    category: "Web Application",
-    description: "Comprehensive glossary application with search, categorization, and multi-language support.",
-    image: "/2.png",
-    link: "#",
+    number: "02",
+    title: "Skill-Based Freelance Marketplace",
+    subtitle: "Talent Matching & Service Platform",
+    description: "A modern digital marketplace designed to connect clients with specialized freelancers based on verified technical skills, project portfolios, and transparent direct hiring workflows.",
+    tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
+    href: "https://vercel.com/srikanthraja43-4520s-projects",
+    githubUrl: "https://github.com/srikanthraja43-droid",
+    badgeText: "Web Marketplace",
+    accentGradient: "from-blue-500/20 via-primary/10 to-transparent",
   },
   {
-    title: "Expiry Date Tracker",
-    category: "Inventory System",
-    description: "Smart inventory management system with notifications and expiry alerts.",
-    image: "/3.png",
-    link: "#",
-  },
-  {
-    title: "WiFi Analytics Dashboard",
-    category: "Dashboard",
-    description: "Real-time network performance monitoring and analytics for mesh nodes.",
-    image: "/4.png",
-    link: "#",
-  },
-  {
-    title: "Glossary API",
-    category: "Backend / API",
-    description: "RESTful API for glossary data with advanced filtering and search capabilities.",
-    image: "/5.png",
-    link: "#",
-  },
-  {
-    title: "Inventory Mobile App",
-    category: "Mobile Production",
-    description: "Cross-platform mobile application for tracking product expiry dates on-the-go.",
-    image: "/6.png",
-    link: "#",
+    number: "03",
+    title: "People Counting Detector Using Machine Learning",
+    subtitle: "Computer Vision & Real-time Analytics",
+    description: "A machine learning system for real-time video feed analysis. Detects and tracks human movement in entryways and public spaces with high accuracy for crowd monitoring and space utilization.",
+    tags: ["Python", "OpenCV", "Machine Learning", "YOLO", "Deep Learning"],
+    href: "https://github.com/srikanthraja43-droid",
+    githubUrl: "https://github.com/srikanthraja43-droid",
+    badgeText: "AI & Machine Learning",
+    accentGradient: "from-emerald-500/20 via-primary/10 to-transparent",
   },
 ]
 
 export function Projects() {
   return (
-    <section id="projects" className="py-32 bg-secondary/50">
-      <div className="container px-4">
-        <div className="flex flex-col items-center gap-6 mb-24 text-center">
-          <motion.span
+    <section id="projects" className="py-28 md:py-36 bg-secondary/30 relative overflow-hidden flex flex-col items-center justify-center">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container px-4 relative z-10 max-w-6xl mx-auto flex flex-col items-center">
+        {/* Section Header - Centered */}
+        <div className="flex flex-col items-center gap-4 mb-16 md:mb-24 text-center max-w-3xl mx-auto">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-primary uppercase tracking-[0.4em] text-sm font-bold"
+            className="flex items-center justify-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.3em]"
           >
-            Filmography
-          </motion.span>
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Published Work</span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif text-5xl md:text-8xl text-foreground"
+            className="font-serif text-4xl sm:text-6xl md:text-7xl text-foreground tracking-tight text-center"
           >
-            Featured Works
+            Featured Projects
           </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-base md:text-lg leading-relaxed font-light text-center"
+          >
+            A showcase of full-stack web applications, AI models, and software solutions built with modern technology stacks.
+          </motion.p>
         </div>
 
-        <div className="grid gap-8 md:gap-16 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Projects Grid - Centered */}
+        <div className="grid gap-8 md:gap-10 lg:grid-cols-2 max-w-5xl w-full mx-auto justify-center items-stretch">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group relative aspect-[4/5] overflow-hidden bg-background"
+              transition={{ delay: idx * 0.12, duration: 0.6 }}
+              className="group relative flex flex-col justify-between items-center text-center bg-background/90 backdrop-blur-md border border-primary/15 hover:border-primary/50 transition-all duration-500 rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl hover:shadow-primary/10 overflow-hidden"
             >
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-0 md:grayscale md:group-hover:grayscale-0 opacity-80 md:opacity-40 md:group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 md:group-hover:opacity-40 transition-all duration-700" />
-              
-              <div className="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 flex flex-col items-start gap-3">
-                <div className="md:transform md:translate-y-12 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-700 ease-out">
-                  <span className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold block mb-2 md:mb-3">
-                    {project.category}
+              {/* Top Accent Line */}
+              <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.accentGradient} group-hover:h-1.5 transition-all duration-300`} />
+
+              <div className="w-full flex flex-col items-center">
+                {/* Card Top Row: Number & Badge Centered */}
+                <div className="flex items-center justify-between w-full mb-8">
+                  <span className="font-serif text-4xl md:text-5xl font-bold text-primary/30 group-hover:text-primary transition-colors duration-500">
+                    {project.number}
                   </span>
-                  <h3 className="font-serif text-xl md:text-3xl text-foreground mb-2 md:mb-4 leading-tight">
-                    {project.title}
+                  
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs uppercase tracking-wider font-mono font-semibold px-3 py-1 rounded-full bg-secondary text-foreground/80 border border-primary/10">
+                      {project.badgeText}
+                    </span>
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2.5 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                      aria-label={`Open ${project.title}`}
+                    >
+                      <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Subtitle & Main Title - Centered */}
+                <div className="space-y-2 mb-4 flex flex-col items-center text-center">
+                  <div className="text-xs uppercase tracking-widest text-primary font-mono font-semibold flex items-center justify-center gap-2">
+                    <Code2 className="w-3.5 h-3.5" />
+                    <span>{project.subtitle}</span>
+                  </div>
+                  <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300 text-center">
+                    <a href={project.href} target="_blank" rel="noopener noreferrer">
+                      {project.title}
+                    </a>
                   </h3>
-                  <p className="text-xs text-muted-foreground mb-4 md:mb-8 leading-relaxed line-clamp-2">
-                    {project.description}
-                  </p>
-                  <Button variant="outline" className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground uppercase tracking-widest text-[10px] font-bold px-6 py-4 md:px-8 md:py-6">
-                    View Details
-                  </Button>
+                </div>
+
+                {/* Description - Centered */}
+                <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 font-light text-center max-w-md mx-auto">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Card Footer: Tech Tags & Action Buttons - Centered */}
+              <div className="w-full space-y-6 pt-6 border-t border-border/60 flex flex-col items-center">
+                {/* Tech Tags Centered */}
+                <div className="flex flex-wrap justify-center gap-2">
+                  {project.tags.map((tag, tagIdx) => (
+                    <span
+                      key={tagIdx}
+                      className="text-xs font-mono px-3 py-1 rounded-md bg-secondary/80 text-foreground/80 border border-primary/10 group-hover:border-primary/20 transition-colors duration-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons Centered */}
+                <div className="flex items-center justify-center gap-4 pt-2">
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs uppercase font-bold tracking-wider hover:bg-primary/90 transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-primary/20"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>Live Project</span>
+                  </a>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-primary/20 bg-background hover:bg-secondary text-foreground text-xs uppercase font-bold tracking-wider hover:text-primary transition-all duration-300"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>Source</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-24 text-center">
-          <Button variant="ghost" size="lg" className="rounded-none text-primary hover:bg-transparent group tracking-[0.3em] uppercase font-bold text-xs" asChild>
-            <a href="https://github.com/srikanthraja" target="_blank" rel="noopener noreferrer">
-              Complete Portfolio
-              <ArrowRight className="ml-6 h-5 w-5 transition-transform group-hover:translate-x-2" />
-            </a>
-          </Button>
         </div>
       </div>
     </section>

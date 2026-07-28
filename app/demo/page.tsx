@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/hero"
 import { About } from "@/components/sections/about"
 import { Projects } from "@/components/sections/projects"
 import { Journey } from "@/components/sections/journey"
-import { Resume } from "@/components/sections/resume"
 import { OrbitingSkills } from "@/components/sections/orbiting-skills"
 import { Contact } from "@/components/sections/contact"
 
@@ -15,7 +14,6 @@ export default function DemoPage() {
       <About />
       <Projects />
       <Journey />
-      <Resume />
       <OrbitingSkills />
       <Contact />
       <div className="py-20 text-center bg-background border-t border-primary/10">
