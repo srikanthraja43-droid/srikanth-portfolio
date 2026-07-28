@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Award, FileCheck, Sparkles } from "lucide-react"
+import { Award, BookOpen, FileCheck, Sparkles } from "lucide-react"
 
 interface Certification {
   id: number
@@ -13,6 +13,16 @@ interface Certification {
   description: string
   skills: string[]
   accentGradient: string
+}
+
+interface LearningCert {
+  id: number
+  title: string
+  issuer: string
+  date: string
+  skills: string[]
+  issuerColor: string
+  issuerLabel: string
 }
 
 const certificationsData: Certification[] = [
@@ -62,6 +72,45 @@ const certificationsData: Certification[] = [
   },
 ]
 
+const learningCerts: LearningCert[] = [
+  {
+    id: 1,
+    title: "What Is Generative AI?",
+    issuer: "LinkedIn Learning",
+    date: "Jul 17, 2026",
+    skills: ["Generative AI Tools", "Artificial Intelligence (AI)", "Generative AI"],
+    issuerColor: "bg-[#0077B5]",
+    issuerLabel: "in",
+  },
+  {
+    id: 2,
+    title: "Microsoft Certifications: Exams, Paths & Resources",
+    issuer: "LinkedIn Learning",
+    date: "Jul 18, 2026",
+    skills: ["Career Path Planning", "Tech Career Skills"],
+    issuerColor: "bg-[#0077B5]",
+    issuerLabel: "in",
+  },
+  {
+    id: 3,
+    title: "Data Analytics Job Simulation",
+    issuer: "Deloitte · Forage",
+    date: "Jul 20, 2026",
+    skills: ["Data Analysis", "Forensic Technology"],
+    issuerColor: "bg-[#86BC25]",
+    issuerLabel: "D.",
+  },
+  {
+    id: 4,
+    title: "SQL and Relational Databases 101",
+    issuer: "CognitiveClass.ai · IBM",
+    date: "Jul 20, 2026",
+    skills: ["SQL", "Relational Databases", "IBM Skills Network"],
+    issuerColor: "bg-[#1F70C1]",
+    issuerLabel: "IBM",
+  },
+]
+
 export function Certifications() {
   return (
     <section id="certifications" className="py-28 md:py-36 bg-secondary/20 relative overflow-hidden flex flex-col items-center justify-center">
@@ -102,7 +151,7 @@ export function Certifications() {
           </motion.p>
         </div>
 
-        {/* Certifications Grid - Sleek Typography Cards (No Images) */}
+        {/* Certifications Grid */}
         <div className="grid gap-8 md:gap-10 lg:grid-cols-2 max-w-5xl w-full mx-auto justify-center items-stretch">
           {certificationsData.map((cert, idx) => (
             <motion.div
@@ -142,7 +191,7 @@ export function Certifications() {
                 </p>
               </div>
 
-              {/* Card Footer: Skill Badges & Credential ID */}
+              {/* Card Footer */}
               <div className="w-full space-y-4 pt-6 border-t border-border/60 flex flex-col items-center text-center">
                 <div className="flex flex-wrap justify-center gap-2">
                   {cert.skills.map((skill, sIdx) => (
@@ -154,7 +203,6 @@ export function Certifications() {
                     </span>
                   ))}
                 </div>
-
                 <div className="text-[11px] font-mono text-muted-foreground/70 flex items-center justify-center gap-1.5 pt-1">
                   <FileCheck className="w-3.5 h-3.5 text-primary" />
                   <span>ID: {cert.credentialId}</span>
@@ -163,6 +211,81 @@ export function Certifications() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Continuous Learning ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.15, duration: 0.7 }}
+          className="mt-24 w-full max-w-5xl mx-auto"
+        >
+          {/* Sub-header */}
+          <div className="flex flex-col items-center gap-3 mb-10 text-center">
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-xs font-bold uppercase tracking-[0.3em]">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Continuous Learning</span>
+            </div>
+            <h3 className="font-serif text-3xl sm:text-4xl text-foreground tracking-tight">
+              Course Completions
+            </h3>
+            <p className="text-muted-foreground text-sm md:text-base font-light max-w-xl">
+              Verified online courses from globally recognised platforms — demonstrating a commitment to lifelong learning.
+            </p>
+          </div>
+
+          {/* Learning Cards Grid */}
+          <div className="grid gap-5 sm:grid-cols-2">
+            {learningCerts.map((lc, idx) => (
+              <motion.div
+                key={lc.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="group relative flex flex-col bg-background/80 backdrop-blur-sm border border-border/50 hover:border-emerald-400/40 rounded-2xl p-6 gap-4 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 overflow-hidden"
+              >
+                {/* Subtle hover glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/0 to-emerald-400/0 group-hover:from-emerald-500/5 group-hover:to-transparent transition-all duration-500 rounded-2xl pointer-events-none" />
+
+                {/* Issuer row */}
+                <div className="flex items-center gap-3 relative z-10">
+                  <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-[10px] font-black shrink-0 ${lc.issuerColor}`}>
+                    {lc.issuerLabel}
+                  </span>
+                  <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                    {lc.issuer}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h4 className="text-sm sm:text-base font-semibold text-foreground leading-snug group-hover:text-emerald-400 transition-colors duration-300 relative z-10">
+                  {lc.title}
+                </h4>
+
+                {/* Date */}
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/60 relative z-10">
+                  <Sparkles className="w-3 h-3 text-emerald-400 shrink-0" />
+                  <span>Completed: {lc.date}</span>
+                </div>
+
+                {/* Skill pills */}
+                <div className="flex flex-wrap gap-1.5 relative z-10">
+                  {lc.skills.map((s, si) => (
+                    <span
+                      key={si}
+                      className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-secondary/60 text-foreground/70 border border-border/50 group-hover:border-emerald-400/20 transition-colors duration-300"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+        {/* ── End Continuous Learning ── */}
+
       </div>
     </section>
   )
