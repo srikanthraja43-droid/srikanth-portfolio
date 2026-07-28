@@ -8,22 +8,26 @@ export function About() {
     <section id="about" className="py-32 bg-background text-foreground">
       <div className="container px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Profile Photo Column */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative w-full max-w-md mx-auto aspect-[3/4]"
           >
-            <div className="relative h-full w-full overflow-hidden bg-secondary/20 shadow-2xl">
+            <div className="relative h-full w-full overflow-hidden bg-secondary/20 shadow-2xl rounded-2xl border border-primary/20">
               <Image
-                src="/images/profile-photo.jpg"
-                alt="Srikanthraja"
+                src="/sri.png"
+                alt="Srikanthraja R"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-1000 ease-in-out"
+                priority
               />
             </div>
           </motion.div>
 
+          {/* Biography & Stats Column */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}

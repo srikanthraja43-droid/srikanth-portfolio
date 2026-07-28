@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
-import { ArrowRight, Code2, Download, Sparkles, Terminal, Award, Briefcase } from "lucide-react"
+import { ArrowRight, Code2, Download, Sparkles, Terminal } from "lucide-react"
+import { TechOrb3D } from "@/components/tech-orb-3d"
 
 export function Hero() {
   return (
@@ -141,65 +141,15 @@ export function Hero() {
 
           </div>
 
-          {/* ── Right Column: Interactive Visual Frame & Floating Badges ── */}
+          {/* ── Right Column: Interactive 3D Cyber Animation Frame ── */}
           <div className="lg:col-span-5 flex justify-center items-center relative">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-primary/30 via-border/40 to-transparent backdrop-blur-xl shadow-2xl group"
+              className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-primary/30 via-border/40 to-transparent backdrop-blur-xl shadow-2xl overflow-hidden flex items-center justify-center"
             >
-              {/* Card Inner Image Wrapper */}
-              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-secondary/40 border border-primary/20">
-                <Image
-                  src="/images/profile-photo.jpg"
-                  alt="Srikanthraja R"
-                  fill
-                  style={{ objectPosition: "50% 25%" }}
-                  className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
-                  priority
-                />
-
-                {/* Subtle Image Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-
-                {/* Image Label Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/80 backdrop-blur-md border border-primary/20 shadow-lg">
-                  <div className="text-xs font-mono font-bold text-primary uppercase tracking-widest">Srikanthraja R</div>
-                  <div className="text-xs text-muted-foreground font-light">B.Tech CSBS @ Excel Engg. College</div>
-                </div>
-              </div>
-
-              {/* Floating Badge 1: Experience */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -left-4 sm:-left-8 px-4 py-2.5 rounded-2xl bg-background/90 backdrop-blur-md border border-primary/30 shadow-xl flex items-center gap-3"
-              >
-                <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                  <Briefcase className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-foreground">IT Intern</div>
-                  <div className="text-[10px] font-mono text-muted-foreground">Infochord Tech</div>
-                </div>
-              </motion.div>
-
-              {/* Floating Badge 2: National Expo Award */}
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 -right-4 sm:-right-8 px-4 py-2.5 rounded-2xl bg-background/90 backdrop-blur-md border border-emerald-500/30 shadow-xl flex items-center gap-3"
-              >
-                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                  <Award className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-foreground">2nd Place Winner</div>
-                  <div className="text-[10px] font-mono text-muted-foreground">ARIVOLI 2K26 Expo</div>
-                </div>
-              </motion.div>
-
+              <TechOrb3D />
             </motion.div>
           </div>
 

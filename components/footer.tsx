@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -6,10 +7,17 @@ export function Footer() {
       <div className="container px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="flex flex-col items-center md:items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center border border-primary text-primary font-serif text-xl">
-              S
+            {/* Profile photo circle */}
+            <div className="relative h-16 w-16 rounded-full overflow-hidden border border-primary shadow-md shadow-primary/20">
+              <Image
+                src="/sri.png"
+                alt="Srikanthraja R"
+                fill
+                sizes="64px"
+                className="object-cover object-top"
+              />
             </div>
-            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-foreground/40 mt-4">
+            <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-foreground/40 mt-2">
               Srikanthraja &copy; {new Date().getFullYear()}
             </p>
           </div>
