@@ -2,77 +2,230 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
+import { ArrowRight, Code2, Download, Sparkles, Terminal, Award, Briefcase } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-background">
-      {/* Background Image with Cinematic Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/profile-photo.jpg"
-          alt="Srikanthraja"
-          fill
-          style={{ objectPosition: "50% 30%" }}
-          className="object-cover opacity-40 grayscale transition-all duration-1000"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background" />
-      </div>
-
-      <div className="container relative z-10 flex flex-col items-center text-center px-4">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-primary uppercase tracking-[0.4em] text-xs md:text-sm font-bold mb-6"
-        >
-          Full Stack Developer & UI/UX Designer
-        </motion.span>
-        
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-serif text-5xl sm:text-7xl md:text-9xl text-foreground leading-tight mb-8 md:mb-12 tracking-tighter"
-        >
-          Srikanthraja
-        </motion.h1>
-
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background py-20 lg:py-0">
+      {/* ── Dynamic Ambient Background & Mesh Gradient ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Animated Gradient Blob 1 */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap gap-8 justify-center"
-        >
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-500 px-8 py-6 md:px-12 md:py-8 text-base md:text-lg uppercase tracking-widest font-bold"
-            asChild
-          >
-            <a href="#projects">View Work</a>
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-500 px-8 py-6 md:px-12 md:py-8 text-base md:text-lg uppercase tracking-widest font-bold"
-            asChild
-          >
-            <a href="#contact">Get In Touch</a>
-          </Button>
-        </motion.div>
+          animate={{
+            x: [0, 40, -30, 0],
+            y: [0, -50, 30, 0],
+            scale: [1, 1.2, 0.9, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-primary/30 via-purple-500/20 to-transparent rounded-full blur-[120px] opacity-70"
+        />
+
+        {/* Animated Gradient Blob 2 */}
+        <motion.div
+          animate={{
+            x: [0, -50, 40, 0],
+            y: [0, 40, -40, 0],
+            scale: [1, 0.9, 1.1, 1],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 -right-32 w-[550px] h-[550px] bg-gradient-to-tl from-emerald-500/20 via-primary/20 to-transparent rounded-full blur-[130px] opacity-60"
+        />
+
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808010_1px,transparent_1px),linear-gradient(to_bottom,#80808010_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
-      {/* Cinematic Scroll Indicator */}
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[calc(100vh-5rem)] py-12">
+          
+          {/* ── Left Column: Content & Calls to Action ── */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+            
+            {/* Status Pill Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md shadow-sm"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+              </span>
+              <span className="text-xs font-mono font-medium text-foreground tracking-wide">
+                Available for IT & Software Opportunities
+              </span>
+            </motion.div>
+
+            {/* Main Headline */}
+            <div className="space-y-4 max-w-2xl">
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-foreground"
+              >
+                Srikanthraja <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-lg sm:text-2xl font-light text-primary font-mono tracking-wide flex items-center justify-center lg:justify-start gap-2"
+              >
+                <Terminal className="w-5 h-5 text-primary shrink-0" />
+                <span>Full Stack Developer & UI/UX Specialist</span>
+              </motion.p>
+            </div>
+
+            {/* Sub-description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl font-light"
+            >
+              Engineering high-performance web applications, intelligent AI interfaces, and business systems. IT Development Intern at Infochord Technologies.
+            </motion.p>
+
+            {/* Buttons Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 w-full sm:w-auto"
+            >
+              <a
+                href="#projects"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  <span>Explore Work</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </a>
+
+              <a
+                href="/SRI Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl border border-border/80 bg-background/80 backdrop-blur-md text-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:border-primary/50 hover:bg-secondary/60 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto shadow-sm"
+              >
+                <Download className="w-4 h-4 text-primary" />
+                <span>Get Resume</span>
+              </a>
+            </motion.div>
+
+            {/* Quick Skills Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs font-mono text-muted-foreground"
+            >
+              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
+                <Code2 className="w-3.5 h-3.5 text-primary" />
+                React / Next.js
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                Generative AI & Prompt Engineering
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
+                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
+                Node.js & Databases
+              </span>
+            </motion.div>
+
+          </div>
+
+          {/* ── Right Column: Interactive Visual Frame & Floating Badges ── */}
+          <div className="lg:col-span-5 flex justify-center items-center relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-primary/30 via-border/40 to-transparent backdrop-blur-xl shadow-2xl group"
+            >
+              {/* Card Inner Image Wrapper */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-secondary/40 border border-primary/20">
+                <Image
+                  src="/images/profile-photo.jpg"
+                  alt="Srikanthraja R"
+                  fill
+                  style={{ objectPosition: "50% 25%" }}
+                  className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
+                  priority
+                />
+
+                {/* Subtle Image Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+
+                {/* Image Label Overlay */}
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/80 backdrop-blur-md border border-primary/20 shadow-lg">
+                  <div className="text-xs font-mono font-bold text-primary uppercase tracking-widest">Srikanthraja R</div>
+                  <div className="text-xs text-muted-foreground font-light">B.Tech CSBS @ Excel Engg. College</div>
+                </div>
+              </div>
+
+              {/* Floating Badge 1: Experience */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-4 sm:-left-8 px-4 py-2.5 rounded-2xl bg-background/90 backdrop-blur-md border border-primary/30 shadow-xl flex items-center gap-3"
+              >
+                <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                  <Briefcase className="w-4 h-4" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs font-bold text-foreground">IT Intern</div>
+                  <div className="text-[10px] font-mono text-muted-foreground">Infochord Tech</div>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 2: National Expo Award */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 -right-4 sm:-right-8 px-4 py-2.5 rounded-2xl bg-background/90 backdrop-blur-md border border-emerald-500/30 shadow-xl flex items-center gap-3"
+              >
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                  <Award className="w-4 h-4" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs font-bold text-foreground">2nd Place Winner</div>
+                  <div className="text-[10px] font-mono text-muted-foreground">ARIVOLI 2K26 Expo</div>
+                </div>
+              </motion.div>
+
+            </motion.div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── Modern Animated Scroll Indicator ── */}
       <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10"
       >
-        <span className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold [writing-mode:vertical-lr]">Scroll</span>
-        <div className="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent" />
+        <a href="#about" className="flex flex-col items-center gap-1 group">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground group-hover:text-primary transition-colors">
+            Explore
+          </span>
+          <div className="w-5 h-9 rounded-full border-2 border-primary/30 flex items-start justify-center p-1 group-hover:border-primary transition-colors">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full bg-primary"
+            />
+          </div>
+        </a>
       </motion.div>
     </section>
   )
 }
+
