@@ -49,6 +49,17 @@ const projects: Project[] = [
     badgeText: "AI & Machine Learning",
     accentGradient: "from-emerald-500/20 via-primary/10 to-transparent",
   },
+  {
+    number: "04",
+    title: "PG-360",
+    subtitle: "Accommodation & 360° Virtual Tour Platform",
+    description: "A modern Paying Guest (PG) management application featuring immersive 360° room walkthroughs, instant online booking requests, transparent pricing, and tenant management.",
+    tags: ["Next.js", "React", "Three.js", "Tailwind CSS", "Node.js"],
+    href: "https://github.com/navaniarts007/PG360",
+    githubUrl: "https://github.com/navaniarts007/PG360",
+    badgeText: "PropTech & 360°",
+    accentGradient: "from-purple-500/20 via-primary/10 to-transparent",
+  },
 ]
 
 export function Projects() {
