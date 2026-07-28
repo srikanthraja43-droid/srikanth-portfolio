@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Award, BookOpen, FileCheck, Sparkles } from "lucide-react"
+import { Award, BookOpen, ExternalLink, FileCheck, Sparkles } from "lucide-react"
 
 interface Certification {
   id: number
@@ -23,6 +23,7 @@ interface LearningCert {
   skills: string[]
   issuerColor: string
   issuerLabel: string
+  credentialUrl?: string
 }
 
 const certificationsData: Certification[] = [
@@ -117,6 +118,7 @@ const learningCerts: LearningCert[] = [
     skills: ["SQL", "Relational Databases", "IBM Skills Network"],
     issuerColor: "bg-[#1F70C1]",
     issuerLabel: "IBM",
+    credentialUrl: "https://courses.cognitiveclass.ai/certificates/b7b0efb9692c4c8aadd1b85297d6bc1d",
   },
 ]
 
@@ -289,6 +291,21 @@ export function Certifications() {
                     </span>
                   ))}
                 </div>
+
+                {/* Verification Link */}
+                {lc.credentialUrl && (
+                  <div className="pt-2 border-t border-border/40 relative z-10">
+                    <a
+                      href={lc.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span>Verify Credential</span>
+                    </a>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
