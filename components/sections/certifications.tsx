@@ -4,9 +4,7 @@ import { useRef, useState } from "react"
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
 import {
   Award,
-  BookOpen,
   Building2,
-  ExternalLink,
   FileCheck,
   GraduationCap,
   Sparkles,
@@ -28,17 +26,6 @@ interface Certification {
   badgeBorder: string
   accentColor: string
   iconType: "internship" | "award" | "seminar" | "degree"
-}
-
-interface LearningCert {
-  id: number
-  title: string
-  issuer: string
-  date: string
-  skills: string[]
-  issuerColor: string
-  issuerLabel: string
-  credentialUrl?: string
 }
 
 const certificationsData: Certification[] = [
@@ -112,55 +99,6 @@ const certificationsData: Certification[] = [
   },
 ]
 
-const learningCerts: LearningCert[] = [
-  {
-    id: 1,
-    title: "Foundations of Prompt Engineering",
-    issuer: "AWS Training & Certification",
-    date: "Jul 17, 2026",
-    skills: ["Prompt Engineering", "Generative AI", "AWS Bedrock"],
-    issuerColor: "bg-[#FF9900]",
-    issuerLabel: "AWS",
-  },
-  {
-    id: 2,
-    title: "What Is Generative AI?",
-    issuer: "LinkedIn Learning",
-    date: "Jul 17, 2026",
-    skills: ["Generative AI Tools", "Artificial Intelligence (AI)", "Generative AI"],
-    issuerColor: "bg-[#0077B5]",
-    issuerLabel: "in",
-  },
-  {
-    id: 3,
-    title: "Microsoft Certifications: Exams, Paths & Resources",
-    issuer: "LinkedIn Learning",
-    date: "Jul 18, 2026",
-    skills: ["Career Path Planning", "Tech Career Skills"],
-    issuerColor: "bg-[#0077B5]",
-    issuerLabel: "in",
-  },
-  {
-    id: 4,
-    title: "Data Analytics Job Simulation",
-    issuer: "Deloitte · Forage",
-    date: "Jul 20, 2026",
-    skills: ["Data Analysis", "Forensic Technology"],
-    issuerColor: "bg-[#86BC25]",
-    issuerLabel: "D.",
-  },
-  {
-    id: 5,
-    title: "SQL and Relational Databases 101",
-    issuer: "CognitiveClass.ai · IBM",
-    date: "Jul 20, 2026",
-    skills: ["SQL", "Relational Databases", "IBM Skills Network"],
-    issuerColor: "bg-[#1F70C1]",
-    issuerLabel: "IBM",
-    credentialUrl: "https://courses.cognitiveclass.ai/certificates/b7b0efb9692c4c8aadd1b85297d6bc1d",
-  },
-]
-
 export function Certifications() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -172,13 +110,13 @@ export function Certifications() {
   })
 
   // Smooth horizontal scroll transform across cards
-  const x = useTransform(scrollYProgress, [0, 0.92], ["0%", "-75%"])
+  const x = useTransform(scrollYProgress, [0, 0.95], ["0%", "-75%"])
 
   // Update active index indicator
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.min(
       certificationsData.length - 1,
-      Math.floor((latest / 0.92) * certificationsData.length)
+      Math.floor((latest / 0.95) * certificationsData.length)
     )
     if (index >= 0 && index !== activeIndex) {
       setActiveIndex(index)
@@ -201,7 +139,7 @@ export function Certifications() {
   return (
     <div ref={sectionRef} id="certifications" className="relative h-[200vh] bg-background">
       {/* Pinned Sticky Window */}
-      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-8 md:py-10">
+      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
         
         {/* Background grid pattern */}
         <div
@@ -224,7 +162,7 @@ export function Certifications() {
 
         {/* ── 1. Section Header & Progress ── */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center shrink-0">
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-2">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-3">
             <Award className="w-3.5 h-3.5" />
             <span>Verified Certificates</span>
           </div>
@@ -234,7 +172,7 @@ export function Certifications() {
           </h2>
         </div>
 
-        {/* ── 2. Scroll-Pinned Certificate Cards Track (No Images) ── */}
+        {/* ── 2. Scroll-Pinned Certificate Cards Track ── */}
         <div className="relative z-10 my-auto overflow-hidden py-4">
           <motion.div style={{ x }} className="flex gap-8 sm:gap-12 px-6 sm:px-24 w-max">
             {certificationsData.map((cert, idx) => (
@@ -333,81 +271,6 @@ export function Certifications() {
           </div>
         </div>
 
-      </div>
-
-      {/* ── 4. Continuous Learning / Course Completions Section ── */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 pt-10 pb-6 border-t border-border/40 bg-background">
-        <div className="flex flex-col items-center gap-3 mb-12 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.35em]">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Continuous Learning</span>
-          </div>
-          <h3 className="font-serif text-3xl sm:text-4xl text-foreground tracking-tight">
-            Course Completions
-          </h3>
-          <p className="text-muted-foreground text-sm md:text-base font-light max-w-lg">
-            Verified online courses from globally recognised platforms — demonstrating a commitment to lifelong learning.
-          </p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {learningCerts.map((lc, idx) => (
-            <motion.div
-              key={lc.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.5 }}
-              className="group relative flex flex-col bg-secondary/10 backdrop-blur-sm border border-border/40 hover:border-emerald-400/30 rounded-2xl p-5 gap-3.5 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] bg-emerald-400/0 group-hover:bg-emerald-400/5 transition-all duration-500 pointer-events-none" />
-
-              <div className="flex items-center gap-2.5 relative z-10">
-                <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-[10px] font-black shrink-0 ${lc.issuerColor}`}>
-                  {lc.issuerLabel}
-                </span>
-                <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-muted-foreground truncate">
-                  {lc.issuer}
-                </span>
-              </div>
-
-              <h4 className="text-sm sm:text-[15px] font-semibold text-foreground leading-snug group-hover:text-emerald-400 transition-colors duration-300 relative z-10">
-                {lc.title}
-              </h4>
-
-              <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/50 relative z-10">
-                <Sparkles className="w-3 h-3 text-emerald-400/70 shrink-0" />
-                <span>Completed: {lc.date}</span>
-              </div>
-
-              <div className="flex flex-wrap gap-1.5 relative z-10">
-                {lc.skills.map((s, si) => (
-                  <span
-                    key={si}
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-secondary/50 text-foreground/60 border border-border/40 group-hover:border-emerald-400/15 transition-colors duration-300"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-
-              {lc.credentialUrl && (
-                <div className="pt-2.5 border-t border-border/30 relative z-10">
-                  <a
-                    href={lc.credentialUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                    Verify Credential
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
       </div>
     </div>
   )

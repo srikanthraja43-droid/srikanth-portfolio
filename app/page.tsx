@@ -6,6 +6,7 @@ import { About } from "@/components/sections/about"
 import { Projects } from "@/components/sections/projects"
 import { Journey } from "@/components/sections/journey"
 import { Certifications } from "@/components/sections/certifications"
+import { CourseCompletions } from "@/components/sections/course-completions"
 import { OrbitingSkills } from "@/components/sections/orbiting-skills"
 import { Contact } from "@/components/sections/contact"
 import { Toaster } from "@/components/ui/sonner"
@@ -29,6 +30,7 @@ export default function Home() {
           <Projects />
           <Journey />
           <Certifications />
+          <CourseCompletions />
           <OrbitingSkills />
           <Contact />
           <Toaster />
