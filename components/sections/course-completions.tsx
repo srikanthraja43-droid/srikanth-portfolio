@@ -65,7 +65,7 @@ const learningCerts: LearningCert[] = [
 
 export function CourseCompletions() {
   return (
-    <section id="course-completions" className="py-24 bg-background border-t border-border/40 relative overflow-hidden">
+    <section id="course-completions" className="pt-4 pb-16 bg-background relative overflow-hidden">
       {/* Background Ambient Glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] pointer-events-none"

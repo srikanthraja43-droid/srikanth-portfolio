@@ -137,7 +137,7 @@ export function Certifications() {
   }
 
   return (
-    <div ref={sectionRef} id="certifications" className="relative h-[200vh] bg-background">
+    <div ref={sectionRef} id="certifications" className="relative h-[140vh] bg-background">
       {/* Pinned Sticky Window */}
       <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
         
