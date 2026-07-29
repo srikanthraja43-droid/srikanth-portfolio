@@ -137,7 +137,7 @@ export function Certifications() {
   const cert = certificationsData[activeIndex]
 
   return (
-    <div ref={sectionRef} id="certifications" className="relative h-[300vh] bg-background">
+    <div ref={sectionRef} id="certifications" className="relative h-[220vh] bg-background">
       {/* Pinned Sticky Window - Locks in center while user scrolls through certificates */}
       <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
         
