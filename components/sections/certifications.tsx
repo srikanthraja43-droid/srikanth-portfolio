@@ -2,13 +2,10 @@
 
 import { useRef, useState } from "react"
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
-import Image from "next/image"
 import {
   Award,
   BookOpen,
   Building2,
-  ChevronLeft,
-  ChevronRight,
   ExternalLink,
   FileCheck,
   GraduationCap,
@@ -26,7 +23,6 @@ interface Certification {
   description: string
   skills: string[]
   accentGradient: string
-  image: string
   badgeBg: string
   badgeText: string
   badgeBorder: string
@@ -58,7 +54,6 @@ const certificationsData: Certification[] = [
     skills: ["IT Development", "Full Stack", "Web Applications", "Software Tools"],
     accentGradient: "from-amber-500 via-orange-500 to-amber-600",
     accentColor: "#f59e0b",
-    image: "/certificate 2.jpeg",
     badgeBg: "bg-amber-500/10",
     badgeText: "text-amber-400",
     badgeBorder: "border-amber-500/30",
@@ -76,7 +71,6 @@ const certificationsData: Certification[] = [
     skills: ["Project Expo", "System Design", "2nd Place Winner"],
     accentGradient: "from-emerald-500 via-teal-500 to-emerald-600",
     accentColor: "#10b981",
-    image: "/certificate 4.jpeg",
     badgeBg: "bg-emerald-500/10",
     badgeText: "text-emerald-400",
     badgeBorder: "border-emerald-500/30",
@@ -94,7 +88,6 @@ const certificationsData: Certification[] = [
     skills: ["Machine Learning", "Graph Theory", "AI Foundations"],
     accentGradient: "from-blue-500 via-cyan-500 to-blue-600",
     accentColor: "#3b82f6",
-    image: "/certificate 1.jpeg",
     badgeBg: "bg-blue-500/10",
     badgeText: "text-blue-400",
     badgeBorder: "border-blue-500/30",
@@ -112,7 +105,6 @@ const certificationsData: Certification[] = [
     skills: ["Computer Science", "Business Systems", "Web Engineering"],
     accentGradient: "from-purple-500 via-violet-500 to-purple-600",
     accentColor: "#a855f7",
-    image: "/certificate 3.jpeg",
     badgeBg: "bg-purple-500/10",
     badgeText: "text-purple-400",
     badgeBorder: "border-purple-500/30",
@@ -179,14 +171,14 @@ export function Certifications() {
     offset: ["start start", "end end"],
   })
 
-  // Horizontal motion transform across cards
-  const x = useTransform(scrollYProgress, [0, 0.75], ["0%", "-72%"])
+  // Smooth horizontal scroll transform across cards
+  const x = useTransform(scrollYProgress, [0, 0.8], ["0%", "-75%"])
 
-  // Update active index based on scroll position
+  // Update active index indicator
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.min(
       certificationsData.length - 1,
-      Math.floor((latest / 0.75) * certificationsData.length)
+      Math.floor((latest / 0.8) * certificationsData.length)
     )
     if (index >= 0 && index !== activeIndex) {
       setActiveIndex(index)
@@ -196,20 +188,20 @@ export function Certifications() {
   const renderIcon = (type: Certification["iconType"]) => {
     switch (type) {
       case "internship":
-        return <Building2 className="w-3.5 h-3.5" />
+        return <Building2 className="w-4 h-4" />
       case "award":
-        return <Trophy className="w-3.5 h-3.5" />
+        return <Trophy className="w-4 h-4" />
       case "seminar":
-        return <Sparkles className="w-3.5 h-3.5" />
+        return <Sparkles className="w-4 h-4" />
       case "degree":
-        return <GraduationCap className="w-3.5 h-3.5" />
+        return <GraduationCap className="w-4 h-4" />
     }
   }
 
   return (
     <div ref={sectionRef} id="certifications" className="relative h-[320vh] bg-background">
       {/* Pinned Sticky Window */}
-      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-8 md:py-12">
+      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
         
         {/* Background grid pattern */}
         <div
@@ -234,7 +226,7 @@ export function Certifications() {
         <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center shrink-0">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-3">
             <Award className="w-3.5 h-3.5" />
-            <span>Verified Credentials (Scroll to Explore)</span>
+            <span>Verified Certificates</span>
           </div>
 
           <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground tracking-tight">
@@ -242,13 +234,13 @@ export function Certifications() {
           </h2>
         </div>
 
-        {/* ── 2. Pinned Horizontal Certificate Cards Track ── */}
-        <div className="relative z-10 my-auto overflow-hidden py-4">
-          <motion.div style={{ x }} className="flex gap-6 sm:gap-8 px-6 sm:px-16 w-max">
+        {/* ── 2. Scroll-Pinned Certificate Cards Track (No Images) ── */}
+        <div className="relative z-10 my-auto overflow-hidden py-6">
+          <motion.div style={{ x }} className="flex gap-8 sm:gap-12 px-6 sm:px-24 w-max">
             {certificationsData.map((cert, idx) => (
               <div
                 key={cert.id}
-                className="group relative flex-shrink-0 select-none w-[88vw] sm:w-[580px] lg:w-[640px]"
+                className="group relative flex-shrink-0 select-none w-[88vw] sm:w-[560px] lg:w-[620px]"
               >
                 {/* Hover glow */}
                 <div
@@ -258,69 +250,54 @@ export function Certifications() {
                   }}
                 />
 
-                {/* Card Container */}
-                <div className="relative rounded-3xl overflow-hidden border border-border/50 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row h-full">
-                  {/* Accent top bar */}
-                  <div className={`h-1 md:h-full md:w-1.5 w-full bg-gradient-to-r md:bg-gradient-to-b ${cert.accentGradient} shrink-0`} />
+                {/* Sleek Certificate Card */}
+                <div className="relative rounded-3xl overflow-hidden border border-border/60 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
+                  {/* Top gradient accent line */}
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${cert.accentGradient}`} />
 
-                  {/* Certificate Image Frame */}
-                  <div className="relative w-full md:w-5/12 aspect-[4/3] md:aspect-auto shrink-0 bg-background/50 overflow-hidden">
-                    <Image
-                      src={cert.image}
-                      alt={cert.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      priority={idx === 0}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background/90 via-transparent to-transparent opacity-80" />
-                  </div>
-
-                  {/* Body Content */}
-                  <div className="p-6 md:p-8 flex flex-col justify-between space-y-4 flex-grow">
-                    <div>
-                      {/* Top status bar */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
-                          {renderIcon(cert.iconType)}
-                          {cert.category}
-                        </span>
-                        <span className="text-[11px] font-mono text-muted-foreground/60 font-semibold">
-                          {String(idx + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
-                        </span>
-                      </div>
-
-                      <h3 className="font-serif text-2xl sm:text-3xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
-                        {cert.title}
-                      </h3>
-
-                      <div className="flex flex-wrap items-center gap-2 mt-2 text-xs font-mono text-muted-foreground">
-                        <span className="text-foreground/90 font-semibold">{cert.issuer}</span>
-                        <span className="text-primary">•</span>
-                        <span className="text-primary font-semibold">{cert.date}</span>
-                      </div>
-
-                      <p className="text-muted-foreground text-sm leading-relaxed mt-3 font-light">
-                        {cert.description}
-                      </p>
+                  {/* Header info */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className={`inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
+                        {renderIcon(cert.iconType)}
+                        {cert.category}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-muted-foreground/60">
+                        {String(idx + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
+                      </span>
                     </div>
 
-                    {/* Skills & Credential Footer */}
-                    <div className="space-y-3 pt-3 border-t border-border/40">
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/60">
-                        <FileCheck className="w-3.5 h-3.5 text-primary" />
-                        <span>ID: {cert.credentialId}</span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {cert.skills.map((skill, si) => (
-                          <span
-                            key={si}
-                            className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-secondary/80 text-foreground/80 border border-border/50"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+                    <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
+                      {cert.title}
+                    </h3>
+
+                    <div className="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm font-mono text-muted-foreground">
+                      <span className="text-foreground font-semibold">{cert.issuer}</span>
+                      <span className="text-primary">•</span>
+                      <span className="text-primary font-semibold">{cert.date}</span>
+                    </div>
+
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-light pt-2">
+                      {cert.description}
+                    </p>
+                  </div>
+
+                  {/* Skills & Credential Footer */}
+                  <div className="space-y-4 pt-4 border-t border-border/40">
+                    <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground/70">
+                      <FileCheck className="w-4 h-4 text-primary" />
+                      <span>Credential ID: {cert.credentialId}</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {cert.skills.map((skill, si) => (
+                        <span
+                          key={si}
+                          className="text-xs font-mono px-3 py-1.5 rounded-lg bg-secondary/80 text-foreground/80 border border-border/50"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -330,14 +307,14 @@ export function Certifications() {
         </div>
 
         {/* ── 3. Bottom Controls & Scroll Cue Bar ── */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 flex items-center justify-between shrink-0 pt-2">
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 flex items-center justify-between shrink-0">
           {/* Scroll Cue */}
           <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
             </span>
-            <span>Scroll down to cycle certificates</span>
+            <span>Scroll down to reveal each certificate</span>
           </div>
 
           {/* Dot Indicators */}
@@ -347,7 +324,7 @@ export function Certifications() {
                 key={idx}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width: activeIndex === idx ? "28px" : "8px",
+                  width: activeIndex === idx ? "32px" : "8px",
                   height: "8px",
                   background: activeIndex === idx ? "hsl(var(--primary))" : "hsl(var(--border))",
                 }}
@@ -359,7 +336,7 @@ export function Certifications() {
       </div>
 
       {/* ── 4. Continuous Learning / Course Completions Section ── */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 py-20 border-t border-border/40 bg-background">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 border-t border-border/40 bg-background">
         <div className="flex flex-col items-center gap-3 mb-12 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.35em]">
             <BookOpen className="w-3.5 h-3.5" />
