@@ -1,7 +1,8 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import Image from "next/image"
 import {
   Award,
   BookOpen,
@@ -64,8 +65,8 @@ const certificationsData: Certification[] = [
     iconType: "internship",
   },
   {
-    category: "National Expo Award",
     id: 2,
+    category: "National Expo Award",
     title: "ARIVOLI 2K26 — 2nd Place Winner",
     issuer: "Knowledge Institute of Technology, Salem",
     date: "February 2026",
@@ -169,8 +170,28 @@ const learningCerts: LearningCert[] = [
 ]
 
 export function Certifications() {
+  const sectionRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const carouselRef = useRef<HTMLDivElement>(null)
+
+  // Track vertical scroll inside the pinned container
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  })
+
+  // Horizontal motion transform across cards
+  const x = useTransform(scrollYProgress, [0, 0.75], ["0%", "-72%"])
+
+  // Update active index based on scroll position
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const index = Math.min(
+      certificationsData.length - 1,
+      Math.floor((latest / 0.75) * certificationsData.length)
+    )
+    if (index >= 0 && index !== activeIndex) {
+      setActiveIndex(index)
+    }
+  })
 
   const renderIcon = (type: Certification["iconType"]) => {
     switch (type) {
@@ -185,184 +206,148 @@ export function Certifications() {
     }
   }
 
-  const scrollToCard = (index: number) => {
-    if (!carouselRef.current) return
-    const cards = carouselRef.current.querySelectorAll<HTMLElement>("[data-cert-card]")
-    if (cards[index]) {
-      cards[index].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
-    }
-    setActiveIndex(index)
-  }
-
-  const prev = () => scrollToCard(Math.max(0, activeIndex - 1))
-  const next = () => scrollToCard(Math.min(certificationsData.length - 1, activeIndex + 1))
-
   return (
-    <section
-      id="certifications"
-      className="py-28 md:py-36 relative overflow-hidden"
-      style={{ background: "hsl(20 20% 2%)" }}
-    >
-      {/* Background grid pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
+    <div ref={sectionRef} id="certifications" className="relative h-[320vh] bg-background">
+      {/* Pinned Sticky Window */}
+      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-8 md:py-12">
+        
+        {/* Background grid pattern */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
-      {/* Radial glow */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 0%, hsla(32,44%,63%,0.12) 0%, transparent 70%)",
-        }}
-      />
+        {/* Radial glow */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, hsla(32,44%,63%,0.12) 0%, transparent 70%)",
+          }}
+        />
 
-      <div className="container mx-auto max-w-7xl px-4 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col items-center gap-4 mb-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em]"
-          >
+        {/* ── 1. Section Header & Progress ── */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center shrink-0">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-3">
             <Award className="w-3.5 h-3.5" />
-            <span>Verified Credentials</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl text-foreground tracking-tight"
-          >
-            Certifications <span className="text-primary">&</span> Honors
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-base md:text-lg font-light max-w-xl"
-          >
-            Official internship achievements, national technical expo awards, AI seminars, and academic credentials.
-          </motion.p>
-        </div>
-
-        {/* Horizontal Scroll Carousel */}
-        <div className="relative">
-          {/* Arrow nav */}
-          <div className="hidden md:flex items-center justify-between absolute -left-5 -right-5 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
-            <button
-              onClick={prev}
-              disabled={activeIndex === 0}
-              className="pointer-events-auto w-11 h-11 rounded-full flex items-center justify-center border border-border/60 bg-background/80 backdrop-blur-sm text-foreground hover:border-primary/50 hover:text-primary disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 shadow-lg"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={next}
-              disabled={activeIndex === certificationsData.length - 1}
-              className="pointer-events-auto w-11 h-11 rounded-full flex items-center justify-center border border-border/60 bg-background/80 backdrop-blur-sm text-foreground hover:border-primary/50 hover:text-primary disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 shadow-lg"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            <span>Verified Credentials (Scroll to Explore)</span>
           </div>
 
-          {/* Scrollable strip */}
-          <div
-            ref={carouselRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground tracking-tight">
+            Certifications <span className="text-primary">&</span> Honors
+          </h2>
+        </div>
+
+        {/* ── 2. Pinned Horizontal Certificate Cards Track ── */}
+        <div className="relative z-10 my-auto overflow-hidden py-4">
+          <motion.div style={{ x }} className="flex gap-6 sm:gap-8 px-6 sm:px-16 w-max">
             {certificationsData.map((cert, idx) => (
-              <motion.div
+              <div
                 key={cert.id}
-                data-cert-card=""
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.55 }}
-                className="group relative flex-shrink-0 snap-center select-none"
-                style={{ width: "min(88vw, 420px)" }}
-                onClick={() => setActiveIndex(idx)}
+                className="group relative flex-shrink-0 select-none w-[88vw] sm:w-[580px] lg:w-[640px]"
               >
                 {/* Hover glow */}
                 <div
                   className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: `radial-gradient(ellipse at 50% 0%, ${cert.accentColor}28, transparent 70%)`,
+                    background: `radial-gradient(ellipse at 50% 0%, ${cert.accentColor}25, transparent 70%)`,
                   }}
                 />
 
-                {/* Card */}
-                <div className="relative rounded-3xl overflow-hidden border border-border/50 group-hover:border-white/10 transition-all duration-500 bg-secondary/20 backdrop-blur-md shadow-xl">
+                {/* Card Container */}
+                <div className="relative rounded-3xl overflow-hidden border border-border/50 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row h-full">
                   {/* Accent top bar */}
-                  <div className={`h-[3px] w-full bg-gradient-to-r ${cert.accentGradient}`} />
+                  <div className={`h-1 md:h-full md:w-1.5 w-full bg-gradient-to-r md:bg-gradient-to-b ${cert.accentGradient} shrink-0`} />
 
-                  {/* Body */}
-                  <div className="p-6 space-y-4">
-                    {/* Category chip */}
-                    <span className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
-                      {renderIcon(cert.iconType)}
-                      {cert.category}
-                    </span>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-mono text-muted-foreground/50">
-                        {String(idx + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
-                      </span>
-                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/50">
-                        <FileCheck className="w-3 h-3 text-primary/50" />
-                        {cert.credentialId}
-                      </div>
-                    </div>
+                  {/* Certificate Image Frame */}
+                  <div className="relative w-full md:w-5/12 aspect-[4/3] md:aspect-auto shrink-0 bg-background/50 overflow-hidden">
+                    <Image
+                      src={cert.image}
+                      alt={cert.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      priority={idx === 0}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background/90 via-transparent to-transparent opacity-80" />
+                  </div>
 
-                    <h3 className="font-serif text-xl sm:text-2xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
-                      {cert.title}
-                    </h3>
-
-                    <div className="flex flex-wrap items-center gap-1.5 text-[12px] font-mono text-muted-foreground">
-                      <span className="text-foreground/80 font-semibold">{cert.issuer}</span>
-                      <span className="text-primary">·</span>
-                      <span>{cert.date}</span>
-                    </div>
-
-                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                      {cert.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-border/40">
-                      {cert.skills.map((skill, si) => (
-                        <span
-                          key={si}
-                          className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-secondary/60 text-foreground/70 border border-border/50"
-                        >
-                          {skill}
+                  {/* Body Content */}
+                  <div className="p-6 md:p-8 flex flex-col justify-between space-y-4 flex-grow">
+                    <div>
+                      {/* Top status bar */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
+                          {renderIcon(cert.iconType)}
+                          {cert.category}
                         </span>
-                      ))}
+                        <span className="text-[11px] font-mono text-muted-foreground/60 font-semibold">
+                          {String(idx + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif text-2xl sm:text-3xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
+                        {cert.title}
+                      </h3>
+
+                      <div className="flex flex-wrap items-center gap-2 mt-2 text-xs font-mono text-muted-foreground">
+                        <span className="text-foreground/90 font-semibold">{cert.issuer}</span>
+                        <span className="text-primary">•</span>
+                        <span className="text-primary font-semibold">{cert.date}</span>
+                      </div>
+
+                      <p className="text-muted-foreground text-sm leading-relaxed mt-3 font-light">
+                        {cert.description}
+                      </p>
+                    </div>
+
+                    {/* Skills & Credential Footer */}
+                    <div className="space-y-3 pt-3 border-t border-border/40">
+                      <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/60">
+                        <FileCheck className="w-3.5 h-3.5 text-primary" />
+                        <span>ID: {cert.credentialId}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {cert.skills.map((skill, si) => (
+                          <span
+                            key={si}
+                            className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-secondary/80 text-foreground/80 border border-border/50"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
+          </motion.div>
+        </div>
+
+        {/* ── 3. Bottom Controls & Scroll Cue Bar ── */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 flex items-center justify-between shrink-0 pt-2">
+          {/* Scroll Cue */}
+          <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+            </span>
+            <span>Scroll down to cycle certificates</span>
           </div>
 
-          {/* Dot indicators */}
-          <div className="flex items-center justify-center gap-2 mt-6">
+          {/* Dot Indicators */}
+          <div className="flex items-center gap-2">
             {certificationsData.map((_, idx) => (
-              <button
+              <div
                 key={idx}
-                onClick={() => scrollToCard(idx)}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width: activeIndex === idx ? "24px" : "8px",
+                  width: activeIndex === idx ? "28px" : "8px",
                   height: "8px",
                   background: activeIndex === idx ? "hsl(var(--primary))" : "hsl(var(--border))",
                 }}
@@ -371,87 +356,82 @@ export function Certifications() {
           </div>
         </div>
 
-        {/* Continuous Learning */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15, duration: 0.7 }}
-          className="mt-28 w-full"
-        >
-          <div className="flex flex-col items-center gap-3 mb-12 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.35em]">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Continuous Learning</span>
-            </div>
-            <h3 className="font-serif text-3xl sm:text-4xl text-foreground tracking-tight">
-              Course Completions
-            </h3>
-            <p className="text-muted-foreground text-sm md:text-base font-light max-w-lg">
-              Verified online courses from globally recognised platforms — demonstrating a commitment to lifelong learning.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {learningCerts.map((lc, idx) => (
-              <motion.div
-                key={lc.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08, duration: 0.5 }}
-                className="group relative flex flex-col bg-secondary/10 backdrop-blur-sm border border-border/40 hover:border-emerald-400/30 rounded-2xl p-5 gap-3.5 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] bg-emerald-400/0 group-hover:bg-emerald-400/5 transition-all duration-500 pointer-events-none" />
-
-                <div className="flex items-center gap-2.5 relative z-10">
-                  <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-[10px] font-black shrink-0 ${lc.issuerColor}`}>
-                    {lc.issuerLabel}
-                  </span>
-                  <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-muted-foreground truncate">
-                    {lc.issuer}
-                  </span>
-                </div>
-
-                <h4 className="text-sm sm:text-[15px] font-semibold text-foreground leading-snug group-hover:text-emerald-400 transition-colors duration-300 relative z-10">
-                  {lc.title}
-                </h4>
-
-                <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/50 relative z-10">
-                  <Sparkles className="w-3 h-3 text-emerald-400/70 shrink-0" />
-                  <span>Completed: {lc.date}</span>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 relative z-10">
-                  {lc.skills.map((s, si) => (
-                    <span
-                      key={si}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-secondary/50 text-foreground/60 border border-border/40 group-hover:border-emerald-400/15 transition-colors duration-300"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-
-                {lc.credentialUrl && (
-                  <div className="pt-2.5 border-t border-border/30 relative z-10">
-                    <a
-                      href={lc.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      Verify Credential
-                    </a>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
-    </section>
+
+      {/* ── 4. Continuous Learning / Course Completions Section ── */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 py-20 border-t border-border/40 bg-background">
+        <div className="flex flex-col items-center gap-3 mb-12 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.35em]">
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Continuous Learning</span>
+          </div>
+          <h3 className="font-serif text-3xl sm:text-4xl text-foreground tracking-tight">
+            Course Completions
+          </h3>
+          <p className="text-muted-foreground text-sm md:text-base font-light max-w-lg">
+            Verified online courses from globally recognised platforms — demonstrating a commitment to lifelong learning.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {learningCerts.map((lc, idx) => (
+            <motion.div
+              key={lc.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08, duration: 0.5 }}
+              className="group relative flex flex-col bg-secondary/10 backdrop-blur-sm border border-border/40 hover:border-emerald-400/30 rounded-2xl p-5 gap-3.5 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-[80px] bg-emerald-400/0 group-hover:bg-emerald-400/5 transition-all duration-500 pointer-events-none" />
+
+              <div className="flex items-center gap-2.5 relative z-10">
+                <span className={`inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-[10px] font-black shrink-0 ${lc.issuerColor}`}>
+                  {lc.issuerLabel}
+                </span>
+                <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-muted-foreground truncate">
+                  {lc.issuer}
+                </span>
+              </div>
+
+              <h4 className="text-sm sm:text-[15px] font-semibold text-foreground leading-snug group-hover:text-emerald-400 transition-colors duration-300 relative z-10">
+                {lc.title}
+              </h4>
+
+              <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-foreground/50 relative z-10">
+                <Sparkles className="w-3 h-3 text-emerald-400/70 shrink-0" />
+                <span>Completed: {lc.date}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 relative z-10">
+                {lc.skills.map((s, si) => (
+                  <span
+                    key={si}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-secondary/50 text-foreground/60 border border-border/40 group-hover:border-emerald-400/15 transition-colors duration-300"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+
+              {lc.credentialUrl && (
+                <div className="pt-2.5 border-t border-border/30 relative z-10">
+                  <a
+                    href={lc.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Verify Credential
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
