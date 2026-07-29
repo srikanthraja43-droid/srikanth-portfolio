@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { ArrowRight, Code2, Download, Sparkles, Terminal } from "lucide-react"
-import { TechOrb3D } from "@/components/tech-orb-3d"
 
 export function Hero() {
   return (
@@ -35,123 +34,90 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808010_1px,transparent_1px),linear-gradient(to_bottom,#80808010_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[calc(100vh-5rem)] py-12">
+      <div className="container relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-5rem)] py-12 space-y-8">
           
-          {/* ── Left Column: Content & Calls to Action ── */}
-          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
-            
-            {/* Status Pill Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+          {/* Main Headline */}
+          <div className="space-y-4 max-w-3xl">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md shadow-sm"
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-foreground"
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
-              <span className="text-xs font-mono font-medium text-foreground tracking-wide">
-                Available for IT & Software Opportunities
-              </span>
-            </motion.div>
+              Srikanthraja <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
+            </motion.h1>
 
-            {/* Main Headline */}
-            <div className="space-y-4 max-w-2xl">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-foreground"
-              >
-                Srikanthraja <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-lg sm:text-2xl font-light text-primary font-mono tracking-wide flex items-center justify-center lg:justify-start gap-2"
-              >
-                <Terminal className="w-5 h-5 text-primary shrink-0" />
-                <span>Full Stack Developer & UI/UX Specialist</span>
-              </motion.p>
-            </div>
-
-            {/* Sub-description */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl font-light"
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-lg sm:text-2xl font-light text-primary font-mono tracking-wide flex items-center justify-center gap-2"
             >
-              Engineering high-performance web applications, intelligent AI interfaces, and business systems. IT Development Intern at Infochord Technologies.
+              <Terminal className="w-5 h-5 text-primary shrink-0" />
+              <span>Full Stack Developer & UI/UX Specialist</span>
             </motion.p>
-
-            {/* Buttons Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 w-full sm:w-auto"
-            >
-              <a
-                href="#projects"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  <span>Explore Work</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </a>
-
-              <a
-                href="/SRI Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl border border-border/80 bg-background/80 backdrop-blur-md text-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:border-primary/50 hover:bg-secondary/60 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto shadow-sm"
-              >
-                <Download className="w-4 h-4 text-primary" />
-                <span>Get Resume</span>
-              </a>
-            </motion.div>
-
-            {/* Quick Skills Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-              className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs font-mono text-muted-foreground"
-            >
-              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
-                <Code2 className="w-3.5 h-3.5 text-primary" />
-                React / Next.js
-              </span>
-              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                Generative AI & Prompt Engineering
-              </span>
-              <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
-                <Terminal className="w-3.5 h-3.5 text-emerald-400" />
-                Node.js & Databases
-              </span>
-            </motion.div>
-
           </div>
 
-          {/* ── Right Column: Interactive 3D Cyber Animation Frame ── */}
-          <div className="lg:col-span-5 flex justify-center items-center relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.15 }}
-              className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-primary/30 via-border/40 to-transparent backdrop-blur-xl shadow-2xl overflow-hidden flex items-center justify-center"
+          {/* Sub-description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="text-muted-foreground text-base sm:text-xl leading-relaxed max-w-2xl font-light"
+          >
+            Engineering high-performance web applications, intelligent AI interfaces, and business systems. IT Development Intern at Infochord Technologies.
+          </motion.p>
+
+          {/* Buttons Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="flex flex-wrap items-center justify-center gap-4 pt-2 w-full sm:w-auto"
+          >
+            <a
+              href="#projects"
+              className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto overflow-hidden"
             >
-              <TechOrb3D />
-            </motion.div>
-          </div>
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Explore Work</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </a>
+
+            <a
+              href="/SRI Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl border border-border/80 bg-background/80 backdrop-blur-md text-foreground font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:border-primary/50 hover:bg-secondary/60 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto shadow-sm"
+            >
+              <Download className="w-4 h-4 text-primary" />
+              <span>Get Resume</span>
+            </a>
+          </motion.div>
+
+          {/* Quick Skills Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
+            className="pt-4 flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono text-muted-foreground"
+          >
+            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+              <Code2 className="w-4 h-4 text-primary" />
+              React / Next.js
+            </span>
+            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              Generative AI & Prompt Engineering
+            </span>
+            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+              <Terminal className="w-4 h-4 text-emerald-400" />
+              Node.js & Databases
+            </span>
+          </motion.div>
 
         </div>
       </div>
