@@ -172,13 +172,13 @@ export function Certifications() {
   })
 
   // Smooth horizontal scroll transform across cards
-  const x = useTransform(scrollYProgress, [0, 0.8], ["0%", "-75%"])
+  const x = useTransform(scrollYProgress, [0, 0.92], ["0%", "-75%"])
 
   // Update active index indicator
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.min(
       certificationsData.length - 1,
-      Math.floor((latest / 0.8) * certificationsData.length)
+      Math.floor((latest / 0.92) * certificationsData.length)
     )
     if (index >= 0 && index !== activeIndex) {
       setActiveIndex(index)
@@ -199,9 +199,9 @@ export function Certifications() {
   }
 
   return (
-    <div ref={sectionRef} id="certifications" className="relative h-[320vh] bg-background">
+    <div ref={sectionRef} id="certifications" className="relative h-[200vh] bg-background">
       {/* Pinned Sticky Window */}
-      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
+      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-8 md:py-10">
         
         {/* Background grid pattern */}
         <div
@@ -224,7 +224,7 @@ export function Certifications() {
 
         {/* ── 1. Section Header & Progress ── */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center shrink-0">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-2">
             <Award className="w-3.5 h-3.5" />
             <span>Verified Certificates</span>
           </div>
@@ -235,7 +235,7 @@ export function Certifications() {
         </div>
 
         {/* ── 2. Scroll-Pinned Certificate Cards Track (No Images) ── */}
-        <div className="relative z-10 my-auto overflow-hidden py-6">
+        <div className="relative z-10 my-auto overflow-hidden py-4">
           <motion.div style={{ x }} className="flex gap-8 sm:gap-12 px-6 sm:px-24 w-max">
             {certificationsData.map((cert, idx) => (
               <div
@@ -251,12 +251,12 @@ export function Certifications() {
                 />
 
                 {/* Sleek Certificate Card */}
-                <div className="relative rounded-3xl overflow-hidden border border-border/60 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl p-8 sm:p-10 flex flex-col justify-between space-y-6">
+                <div className="relative rounded-3xl overflow-hidden border border-border/60 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl p-7 sm:p-9 flex flex-col justify-between space-y-5">
                   {/* Top gradient accent line */}
                   <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${cert.accentGradient}`} />
 
                   {/* Header info */}
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <span className={`inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
                         {renderIcon(cert.iconType)}
@@ -277,13 +277,13 @@ export function Certifications() {
                       <span className="text-primary font-semibold">{cert.date}</span>
                     </div>
 
-                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-light pt-2">
+                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-light pt-1">
                       {cert.description}
                     </p>
                   </div>
 
                   {/* Skills & Credential Footer */}
-                  <div className="space-y-4 pt-4 border-t border-border/40">
+                  <div className="space-y-3 pt-3 border-t border-border/40">
                     <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground/70">
                       <FileCheck className="w-4 h-4 text-primary" />
                       <span>Credential ID: {cert.credentialId}</span>
@@ -336,7 +336,7 @@ export function Certifications() {
       </div>
 
       {/* ── 4. Continuous Learning / Course Completions Section ── */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 py-24 border-t border-border/40 bg-background">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 pt-10 pb-6 border-t border-border/40 bg-background">
         <div className="flex flex-col items-center gap-3 mb-12 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/5 text-emerald-400 text-[11px] font-bold uppercase tracking-[0.35em]">
             <BookOpen className="w-3.5 h-3.5" />
