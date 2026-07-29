@@ -1,10 +1,12 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion"
 import {
   Award,
   Building2,
+  ChevronLeft,
+  ChevronRight,
   FileCheck,
   GraduationCap,
   Sparkles,
@@ -103,20 +105,19 @@ export function Certifications() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  // Track vertical scroll inside the pinned container
+  // Track vertical scroll inside the pinned container (h-[300vh] ensures clear scroll time for each card)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   })
 
-  // Smooth horizontal scroll transform across cards
-  const x = useTransform(scrollYProgress, [0, 0.95], ["0%", "-75%"])
-
-  // Update active index indicator
+  // Map scroll position to active certificate index (0, 1, 2, 3)
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const total = certificationsData.length
+    // Allocate 0 to 0.95 across the cards, leaving 0.95 to 1.0 for release
     const index = Math.min(
-      certificationsData.length - 1,
-      Math.floor((latest / 0.95) * certificationsData.length)
+      total - 1,
+      Math.floor((latest / 0.95) * total)
     )
     if (index >= 0 && index !== activeIndex) {
       setActiveIndex(index)
@@ -136,10 +137,12 @@ export function Certifications() {
     }
   }
 
+  const currentCert = certificationsData[activeIndex]
+
   return (
-    <div ref={sectionRef} id="certifications" className="relative h-[140vh] bg-background">
+    <div ref={sectionRef} id="certifications" className="relative h-[300vh] bg-background">
       {/* Pinned Sticky Window */}
-      <div className="sticky top-0 h-screen flex flex-col justify-between overflow-hidden py-10 md:py-14">
+      <div className="sticky top-0 h-screen flex flex-col justify-between items-center overflow-hidden py-8 sm:py-12">
         
         {/* Background grid pattern */}
         <div
@@ -151,119 +154,133 @@ export function Certifications() {
           }}
         />
 
-        {/* Radial glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, hsla(32,44%,63%,0.12) 0%, transparent 70%)",
+        {/* Radial glow tailored to active card's accent color */}
+        <motion.div
+          animate={{
+            background: `radial-gradient(ellipse at 50% 30%, ${currentCert.accentColor}20 0%, transparent 70%)`,
           }}
+          transition={{ duration: 0.6 }}
+          className="absolute inset-0 pointer-events-none"
         />
 
-        {/* ── 1. Section Header & Progress ── */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center shrink-0">
+        {/* ── 1. Section Header & Progress Badge ── */}
+        <div className="container mx-auto max-w-4xl px-4 relative z-10 text-center shrink-0">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-[11px] font-bold uppercase tracking-[0.35em] mb-3">
             <Award className="w-3.5 h-3.5" />
-            <span>Verified Certificates</span>
+            <span>Verified Certificates ({activeIndex + 1} of {certificationsData.length})</span>
           </div>
 
-          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-foreground tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-foreground tracking-tight">
             Certifications <span className="text-primary">&</span> Honors
           </h2>
         </div>
 
-        {/* ── 2. Scroll-Pinned Certificate Cards Track ── */}
-        <div className="relative z-10 my-auto overflow-hidden py-4">
-          <motion.div style={{ x }} className="flex gap-8 sm:gap-12 px-6 sm:px-24 w-max">
-            {certificationsData.map((cert, idx) => (
-              <div
-                key={cert.id}
-                className="group relative flex-shrink-0 select-none w-[88vw] sm:w-[560px] lg:w-[620px]"
-              >
-                {/* Hover glow */}
-                <div
-                  className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(ellipse at 50% 0%, ${cert.accentColor}25, transparent 70%)`,
-                  }}
-                />
+        {/* ── 2. Centered Full-View Card Showcase with Step Animation ── */}
+        <div className="relative z-10 my-auto w-full max-w-3xl px-4 sm:px-6">
+          {/* Arrow navigation buttons */}
+          <div className="hidden sm:flex items-center justify-between absolute -left-6 -right-6 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
+            <button
+              onClick={() => setActiveIndex((prev) => Math.max(0, prev - 1))}
+              disabled={activeIndex === 0}
+              className="pointer-events-auto w-11 h-11 rounded-full flex items-center justify-center border border-border/60 bg-background/80 backdrop-blur-md text-foreground hover:border-primary/50 hover:text-primary disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 shadow-xl"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setActiveIndex((prev) => Math.min(certificationsData.length - 1, prev + 1))}
+              disabled={activeIndex === certificationsData.length - 1}
+              className="pointer-events-auto w-11 h-11 rounded-full flex items-center justify-center border border-border/60 bg-background/80 backdrop-blur-md text-foreground hover:border-primary/50 hover:text-primary disabled:opacity-20 disabled:pointer-events-none transition-all duration-200 shadow-xl"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
 
-                {/* Sleek Certificate Card */}
-                <div className="relative rounded-3xl overflow-hidden border border-border/60 group-hover:border-primary/40 transition-all duration-500 bg-secondary/20 backdrop-blur-xl shadow-2xl p-7 sm:p-9 flex flex-col justify-between space-y-5">
-                  {/* Top gradient accent line */}
-                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${cert.accentGradient}`} />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentCert.id}
+              initial={{ opacity: 0, y: 25, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -25, scale: 0.97 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              className="relative rounded-3xl overflow-hidden border border-border/70 bg-secondary/30 backdrop-blur-2xl shadow-2xl p-7 sm:p-10 flex flex-col justify-between space-y-6"
+            >
+              {/* Top gradient accent bar */}
+              <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${currentCert.accentGradient}`} />
 
-                  {/* Header info */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className={`inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${cert.badgeBg} ${cert.badgeText} ${cert.badgeBorder}`}>
-                        {renderIcon(cert.iconType)}
-                        {cert.category}
-                      </span>
-                      <span className="text-xs font-mono font-bold text-muted-foreground/60">
-                        {String(idx + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
-                      </span>
-                    </div>
+              {/* Card Header Info */}
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <span className={`inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${currentCert.badgeBg} ${currentCert.badgeText} ${currentCert.badgeBorder}`}>
+                    {renderIcon(currentCert.iconType)}
+                    {currentCert.category}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-muted-foreground/70">
+                    Step {String(activeIndex + 1).padStart(2, "0")} / {String(certificationsData.length).padStart(2, "0")}
+                  </span>
+                </div>
 
-                    <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-foreground font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
-                      {cert.title}
-                    </h3>
+                <h3 className="font-serif text-2xl sm:text-4xl text-foreground font-semibold leading-tight">
+                  {currentCert.title}
+                </h3>
 
-                    <div className="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm font-mono text-muted-foreground">
-                      <span className="text-foreground font-semibold">{cert.issuer}</span>
-                      <span className="text-primary">•</span>
-                      <span className="text-primary font-semibold">{cert.date}</span>
-                    </div>
+                <div className="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm font-mono text-muted-foreground">
+                  <span className="text-foreground font-semibold">{currentCert.issuer}</span>
+                  <span className="text-primary">•</span>
+                  <span className="text-primary font-semibold">{currentCert.date}</span>
+                </div>
 
-                    <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-light pt-1">
-                      {cert.description}
-                    </p>
-                  </div>
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-light pt-2">
+                  {currentCert.description}
+                </p>
+              </div>
 
-                  {/* Skills & Credential Footer */}
-                  <div className="space-y-3 pt-3 border-t border-border/40">
-                    <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground/70">
-                      <FileCheck className="w-4 h-4 text-primary" />
-                      <span>Credential ID: {cert.credentialId}</span>
-                    </div>
+              {/* Skills & Credential Footer */}
+              <div className="space-y-4 pt-4 border-t border-border/40">
+                <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground/70">
+                  <FileCheck className="w-4 h-4 text-primary" />
+                  <span>Credential ID: {currentCert.credentialId}</span>
+                </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {cert.skills.map((skill, si) => (
-                        <span
-                          key={si}
-                          className="text-xs font-mono px-3 py-1.5 rounded-lg bg-secondary/80 text-foreground/80 border border-border/50"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex flex-wrap gap-2">
+                  {currentCert.skills.map((skill, si) => (
+                    <span
+                      key={si}
+                      className="text-xs font-mono px-3 py-1.5 rounded-lg bg-secondary/80 text-foreground/90 border border-border/60"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* ── 3. Bottom Controls & Scroll Cue Bar ── */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 flex items-center justify-between shrink-0">
-          {/* Scroll Cue */}
+        {/* ── 3. Bottom Navigation Controls & Scroll Cues ── */}
+        <div className="container mx-auto max-w-4xl px-4 relative z-10 flex items-center justify-between shrink-0 pt-2">
+          {/* Scroll Cue Indicator */}
           <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
             </span>
-            <span>Scroll down to reveal each certificate</span>
+            <span>
+              {activeIndex < certificationsData.length - 1
+                ? "Scroll down for next certificate"
+                : "Scroll down to continue to Course Completions"}
+            </span>
           </div>
 
-          {/* Dot Indicators */}
+          {/* Interactive Step Buttons / Indicators */}
           <div className="flex items-center gap-2">
             {certificationsData.map((_, idx) => (
-              <div
+              <button
                 key={idx}
+                onClick={() => setActiveIndex(idx)}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width: activeIndex === idx ? "32px" : "8px",
-                  height: "8px",
+                  width: activeIndex === idx ? "32px" : "10px",
+                  height: "10px",
                   background: activeIndex === idx ? "hsl(var(--primary))" : "hsl(var(--border))",
                 }}
               />
