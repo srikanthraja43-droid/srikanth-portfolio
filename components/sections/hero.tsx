@@ -1,11 +1,28 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Code2, Download, Sparkles, Terminal } from "lucide-react"
+import { ArrowRight, Code2, Download, Github, Linkedin, Mail, Sparkles, Terminal } from "lucide-react"
+
+const toolsUsed = [
+  "React & Next.js",
+  "TypeScript",
+  "Node.js & Express",
+  "Python & Flask",
+  "Tailwind CSS",
+  "PostgreSQL & SQL",
+  "REST APIs",
+  "VS Code",
+  "GitHub & Git",
+  "Vercel",
+  "Docker",
+  "Figma & UI/UX",
+  "AWS Bedrock & GenAI",
+  "EmailJS Integration",
+]
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background py-20 lg:py-0">
+    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-background py-16 lg:py-12">
       {/* ── Dynamic Ambient Background & Mesh Gradient ── */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Animated Gradient Blob 1 */}
@@ -34,8 +51,9 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808010_1px,transparent_1px),linear-gradient(to_bottom,#80808010_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
+      {/* ── 1. Top Hero Content ── */}
       <div className="container relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-5rem)] py-12 space-y-8">
+        <div className="flex flex-col items-center justify-center text-center space-y-6">
           
           {/* Main Headline */}
           <div className="space-y-4 max-w-3xl">
@@ -74,7 +92,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-2 w-full sm:w-auto"
+            className="flex flex-wrap items-center justify-center gap-4 pt-1 w-full sm:w-auto"
           >
             <a
               href="#projects"
@@ -98,35 +116,129 @@ export function Hero() {
             </a>
           </motion.div>
 
-          {/* Quick Skills Badges */}
+          {/* Social Links Row (LinkedIn, Vercel, GitHub, Mail) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.25 }}
-            className="pt-4 flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono text-muted-foreground"
+            transition={{ duration: 0.4, delay: 0.23 }}
+            className="flex items-center justify-center gap-3.5 pt-1"
           >
-            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-primary" />
-              React / Next.js
-            </span>
-            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              Generative AI & Prompt Engineering
-            </span>
-            <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-emerald-400" />
-              Node.js & Databases
-            </span>
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/srikanth-r-334447379/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn Profile"
+              className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-secondary/80 border border-border/70 hover:border-[#0A66C2]/60 hover:bg-[#0A66C2]/15 text-muted-foreground hover:text-[#0A66C2] transition-all duration-300 shadow-sm hover:scale-110"
+            >
+              <Linkedin className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+              <span className="sr-only">LinkedIn</span>
+            </a>
+
+            {/* Vercel */}
+            <a
+              href="https://vercel.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Vercel Projects"
+              className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-secondary/80 border border-border/70 hover:border-foreground/60 hover:bg-foreground/15 text-muted-foreground hover:text-foreground transition-all duration-300 shadow-sm hover:scale-110"
+            >
+              <svg className="w-4 h-4 fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24">
+                <path d="M12 1L24 22H0L12 1Z" />
+              </svg>
+              <span className="sr-only">Vercel</span>
+            </a>
+
+            {/* GitHub */}
+            <a
+              href="https://github.com/srikanthraja"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub Repositories"
+              className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-secondary/80 border border-border/70 hover:border-foreground/60 hover:bg-foreground/15 text-muted-foreground hover:text-foreground transition-all duration-300 shadow-sm hover:scale-110"
+            >
+              <Github className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+              <span className="sr-only">GitHub</span>
+            </a>
+
+            {/* Mail */}
+            <a
+              href="mailto:srikanthraja43@gmail.com"
+              title="Send Email"
+              className="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-secondary/80 border border-border/70 hover:border-rose-500/60 hover:bg-rose-500/15 text-muted-foreground hover:text-rose-400 transition-all duration-300 shadow-sm hover:scale-110"
+            >
+              <Mail className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+              <span className="sr-only">Mail</span>
+            </a>
           </motion.div>
 
         </div>
+      </div>
+
+      {/* ── 2. Full Screen Width Single Line Running Tools Ticker Ribbon ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.26 }}
+        className="w-full relative z-10 overflow-hidden py-3 my-6 border-y border-border/40 bg-secondary/10 backdrop-blur-sm"
+      >
+        {/* Side fade gradient masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none" />
+
+        <div className="flex items-center gap-2 mb-2 justify-center">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-muted-foreground/80">
+            Tools & Technologies Used
+          </span>
+        </div>
+
+        {/* Single Continuous Running Line */}
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex items-center gap-4 whitespace-nowrap w-max"
+        >
+          {[...toolsUsed, ...toolsUsed, ...toolsUsed, ...toolsUsed].map((tool, idx) => (
+            <span
+              key={idx}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/80 border border-border/60 text-xs font-mono font-medium text-foreground/90 hover:text-primary hover:border-primary/50 transition-all duration-300 shadow-sm"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+              {tool}
+            </span>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* ── 3. Bottom Quick Skills Badges ── */}
+      <div className="container relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.28 }}
+          className="flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono text-muted-foreground"
+        >
+          <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+            <Code2 className="w-4 h-4 text-primary" />
+            React / Next.js
+          </span>
+          <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            Generative AI & Prompt Engineering
+          </span>
+          <span className="px-3.5 py-2 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-emerald-400" />
+            Node.js & Databases
+          </span>
+        </motion.div>
       </div>
 
       {/* ── Modern Animated Scroll Indicator ── */}
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 1.4, repeat: Infinity }}
-        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10"
+        className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10"
       >
         <a href="#about" className="flex flex-col items-center gap-1 group">
           <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-muted-foreground group-hover:text-primary transition-colors">
@@ -144,4 +256,3 @@ export function Hero() {
     </section>
   )
 }
-
