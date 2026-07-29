@@ -64,8 +64,8 @@ export function TechOrb3D() {
       })
     }
 
-    let angleX = 0.003
-    let angleY = 0.005
+    let angleX = 0.006
+    let angleY = 0.010
 
     const resize = () => {
       width = canvas.parentElement?.offsetWidth || 400
@@ -186,13 +186,13 @@ export function TechOrb3D() {
       {/* 3D Orbiting Glowing Rings */}
       <motion.div
         animate={{ rotateZ: 360, rotateX: 65 }}
-        transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         className="absolute w-[310px] h-[310px] rounded-full border border-amber-400/30 pointer-events-none"
         style={{ boxShadow: "0 0 25px rgba(245, 158, 11, 0.15)" }}
       />
       <motion.div
         animate={{ rotateZ: -360, rotateY: 70 }}
-        transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 11, repeat: Infinity, ease: "linear" }}
         className="absolute w-[360px] h-[360px] rounded-full border border-dashed border-purple-400/30 pointer-events-none"
       />
 
@@ -200,7 +200,7 @@ export function TechOrb3D() {
       {/* Card 1: Top Left - AI & Software */}
       <motion.div
         animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-4 -left-4 sm:-left-6 px-3.5 py-2 rounded-xl bg-background/85 backdrop-blur-xl border border-primary/40 shadow-xl flex items-center gap-2.5 z-20"
         style={{ transform: "translateZ(30px)" }}
       >
@@ -216,7 +216,7 @@ export function TechOrb3D() {
       {/* Card 2: Top Right - IT Development */}
       <motion.div
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
         className="absolute top-12 -right-4 sm:-right-6 px-3.5 py-2 rounded-xl bg-background/85 backdrop-blur-xl border border-emerald-500/40 shadow-xl flex items-center gap-2.5 z-20"
         style={{ transform: "translateZ(40px)" }}
       >
@@ -232,7 +232,7 @@ export function TechOrb3D() {
       {/* Card 3: Bottom Left - Full Stack */}
       <motion.div
         animate={{ y: [0, 7, 0] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        transition={{ duration: 2.3, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
         className="absolute bottom-12 -left-4 sm:-left-6 px-3.5 py-2 rounded-xl bg-background/85 backdrop-blur-xl border border-purple-500/40 shadow-xl flex items-center gap-2.5 z-20"
         style={{ transform: "translateZ(35px)" }}
       >
@@ -248,7 +248,7 @@ export function TechOrb3D() {
       {/* Card 4: Bottom Right - Award */}
       <motion.div
         animate={{ y: [0, -7, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1.0 }}
         className="absolute bottom-4 -right-4 sm:-right-6 px-3.5 py-2 rounded-xl bg-background/85 backdrop-blur-xl border border-amber-400/40 shadow-xl flex items-center gap-2.5 z-20"
         style={{ transform: "translateZ(45px)" }}
       >

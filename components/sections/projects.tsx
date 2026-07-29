@@ -110,7 +110,7 @@ export function Projects() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.12, duration: 0.6 }}
+              transition={{ delay: idx * 0.07, duration: 0.4 }}
               className="group relative flex flex-col justify-between items-center text-center bg-background/90 backdrop-blur-md border border-primary/15 hover:border-primary/50 transition-all duration-500 rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-2xl hover:shadow-primary/10 overflow-hidden"
             >
               {/* Top Accent Line */}

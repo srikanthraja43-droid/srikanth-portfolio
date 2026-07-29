@@ -12,6 +12,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45 }}
             viewport={{ once: true }}
             className="relative w-full max-w-md mx-auto aspect-[3/4]"
           >
@@ -21,7 +22,7 @@ export function About() {
                 alt="Srikanthraja R"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-1000 ease-in-out"
+                className="object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 ease-in-out"
                 priority
               />
             </div>
@@ -31,6 +32,7 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45 }}
             viewport={{ once: true }}
             className="flex flex-col gap-10"
           >

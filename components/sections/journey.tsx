@@ -62,12 +62,12 @@ export function Journey() {
     const items = gsap.utils.toArray<HTMLElement>(".journey-item")
     items.forEach((item) => {
       gsap.fromTo(item,
-        { opacity: 0, y: 50, filter: "blur(10px)" },
+        { opacity: 0, y: 30, filter: "blur(5px)" },
         {
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 1,
+          duration: 0.5,
           scrollTrigger: {
             trigger: item,
             start: "top bottom-=100",

@@ -16,7 +16,7 @@ export function Hero() {
             y: [0, -50, 30, 0],
             scale: [1, 1.2, 0.9, 1],
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-gradient-to-br from-primary/30 via-purple-500/20 to-transparent rounded-full blur-[120px] opacity-70"
         />
 
@@ -27,7 +27,7 @@ export function Hero() {
             y: [0, 40, -40, 0],
             scale: [1, 0.9, 1.1, 1],
           }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/2 -right-32 w-[550px] h-[550px] bg-gradient-to-tl from-emerald-500/20 via-primary/20 to-transparent rounded-full blur-[130px] opacity-60"
         />
 
@@ -45,7 +45,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.35 }}
               className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-md shadow-sm"
             >
               <span className="relative flex h-2.5 w-2.5">
@@ -62,7 +62,7 @@ export function Hero() {
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
+                transition={{ duration: 0.4, delay: 0.05 }}
                 className="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-foreground"
               >
                 Srikanthraja <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
@@ -71,7 +71,7 @@ export function Hero() {
               <motion.p
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-lg sm:text-2xl font-light text-primary font-mono tracking-wide flex items-center justify-center lg:justify-start gap-2"
               >
                 <Terminal className="w-5 h-5 text-primary shrink-0" />
@@ -83,7 +83,7 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
+              transition={{ duration: 0.4, delay: 0.15 }}
               className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-xl font-light"
             >
               Engineering high-performance web applications, intelligent AI interfaces, and business systems. IT Development Intern at Infochord Technologies.
@@ -93,7 +93,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2 w-full sm:w-auto"
             >
               <a
@@ -122,7 +122,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
               className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs font-mono text-muted-foreground"
             >
               <span className="px-3 py-1.5 rounded-lg bg-secondary/80 border border-border/60 flex items-center gap-1.5">
@@ -146,7 +146,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.45, delay: 0.15 }}
               className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-primary/30 via-border/40 to-transparent backdrop-blur-xl shadow-2xl overflow-hidden flex items-center justify-center"
             >
               <TechOrb3D />
@@ -159,7 +159,7 @@ export function Hero() {
       {/* ── Modern Animated Scroll Indicator ── */}
       <motion.div
         animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity }}
+        transition={{ duration: 1.4, repeat: Infinity }}
         className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 z-10"
       >
         <a href="#about" className="flex flex-col items-center gap-1 group">
@@ -169,7 +169,7 @@ export function Hero() {
           <div className="w-5 h-9 rounded-full border-2 border-primary/30 flex items-start justify-center p-1 group-hover:border-primary transition-colors">
             <motion.div
               animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity }}
+              transition={{ duration: 1.0, repeat: Infinity }}
               className="w-1.5 h-1.5 rounded-full bg-primary"
             />
           </div>
