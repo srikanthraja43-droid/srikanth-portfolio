@@ -57,7 +57,7 @@ export function Navbar() {
             className="rounded-none border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-6 text-xs uppercase tracking-widest font-bold transition-all duration-500"
             asChild
           >
-            <a href="#contact">Hire</a>
+            <a href="#contact">Here</a>
           </Button>
         </nav>
 
