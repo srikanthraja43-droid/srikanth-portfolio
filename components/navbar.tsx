@@ -38,7 +38,7 @@ export function Navbar() {
           <div className="flex h-10 w-10 items-center justify-center rounded-none border border-primary text-primary font-serif text-lg transition-all duration-500 group-hover:bg-primary group-hover:text-primary-foreground">
             S
           </div>
-          <span className="text-sm font-bold tracking-[0.3em] uppercase hidden md:block text-foreground">Srikanthraja</span>
+          <span className="text-sm font-bold tracking-[0.3em] uppercase hidden md:block text-foreground">Srikanth R</span>
         </Link>
 
         {/* Desktop Nav */}

@@ -80,7 +80,7 @@ export function SplashScreen({ finishLoading }: { finishLoading: () => void }) {
             transition={{ duration: 0.35, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white text-center"
           >
-            Srikanthraja<span className="italic" style={{ color: "hsl(32,44%,63%)" }}>.</span>
+            Srikanth R<span className="italic" style={{ color: "hsl(32,44%,63%)" }}>.</span>
           </motion.h1>
         </div>
 

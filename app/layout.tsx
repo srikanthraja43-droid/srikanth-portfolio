@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Srikanthraja | Premium Portfolio",
+  title: "Srikanth R | Premium Portfolio",
   description: "Full Stack Developer & UI/UX Designer creating aesthetic Web Portals, Apps & Websites",
 }
 

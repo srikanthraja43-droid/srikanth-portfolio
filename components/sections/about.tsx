@@ -19,7 +19,7 @@ export function About() {
             <div className="relative h-full w-full overflow-hidden bg-secondary/20 shadow-2xl rounded-2xl border border-primary/20">
               <Image
                 src="/sri.png"
-                alt="Srikanthraja R"
+                alt="Srikanth R"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover grayscale-0 md:grayscale md:hover:grayscale-0 transition-all duration-500 ease-in-out"
@@ -47,7 +47,7 @@ export function About() {
             
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed max-w-xl">
               <p>
-                Hi everyone! I&apos;m Srikanthraja from Krishnagiri, Tamil Nadu. Currently a B.Tech Computer Science and Business Systems student at Excel Engineering College.
+                Hi everyone! I&apos;m Srikanth R from Krishnagiri, Tamil Nadu. Currently a B.Tech Computer Science and Business Systems student at Excel Engineering College.
               </p>
               <p>
                 I specialize in Full Stack Development and UI/UX Design, focusing on creating aesthetic, high-performance web portals and mobile applications that make a difference.

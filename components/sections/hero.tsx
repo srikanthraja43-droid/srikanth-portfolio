@@ -63,7 +63,7 @@ export function Hero() {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="font-serif text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[1.05] text-foreground"
             >
-              Srikanthraja <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
+              Srikanth <span className="bg-gradient-to-r from-primary via-purple-400 to-emerald-400 bg-clip-text text-transparent">R</span>
             </motion.h1>
 
             <motion.p

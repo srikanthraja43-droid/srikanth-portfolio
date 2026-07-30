@@ -11,14 +11,14 @@ export function Footer() {
             <div className="relative h-16 w-16 rounded-full overflow-hidden border border-primary shadow-md shadow-primary/20">
               <Image
                 src="/sri.png"
-                alt="Srikanthraja R"
+                alt="Srikanth R"
                 fill
                 sizes="64px"
                 className="object-cover object-top"
               />
             </div>
             <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-foreground/40 mt-2">
-              Srikanthraja &copy; {new Date().getFullYear()}
+              Srikanth R &copy; {new Date().getFullYear()}
             </p>
           </div>
 
